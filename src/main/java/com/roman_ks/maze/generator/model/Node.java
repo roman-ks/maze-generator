@@ -10,12 +10,14 @@ public class Node {
     private int number;
     private final List<Node> connected;
 
-    public Node(int maxEdges) {
-        connected = new ArrayList<>(maxEdges);
-    }
-
-    public void setNumber(int number) {
+    /**
+     * Create node
+     * @param number unique node number within the graph
+     * @param maxEdges maximum number of edges
+     */
+    public Node(int number,int maxEdges) {
         this.number = number;
+        connected = new ArrayList<>(maxEdges);
     }
 
     public int getNumber() {

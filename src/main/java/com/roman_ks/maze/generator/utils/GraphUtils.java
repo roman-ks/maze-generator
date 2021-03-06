@@ -24,8 +24,7 @@ public class GraphUtils {
         // create nodes without edges
         var nodes = new ArrayList<Node>(nodesCount);
         for (int i = 0; i < nodesCount; i++) {
-            var node = new Node(edges);
-            node.setNumber(i);
+            var node = new Node(i, edges);
             nodes.add(node);
         }
 
