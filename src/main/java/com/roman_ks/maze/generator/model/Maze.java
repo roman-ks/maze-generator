@@ -1,6 +1,6 @@
 package com.roman_ks.maze.generator.model;
 
-import com.roman_ks.maze.generator.Visitor;
+import com.roman_ks.maze.generator.visitor.Visitor;
 
 import java.util.List;
 

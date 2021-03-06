@@ -1,6 +1,6 @@
 package com.roman_ks.maze.generator.model;
 
-import com.roman_ks.maze.generator.Visitor;
+import com.roman_ks.maze.generator.visitor.Visitor;
 
 public class RectMaze extends Maze {
     private final int wight;
