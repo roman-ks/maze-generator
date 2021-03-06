@@ -23,4 +23,6 @@ compileTestJava.options.encoding = 'UTF-8'
 
 test {
     useJUnitPlatform()
+
+    systemProperty "file.encoding", "utf-8"
 }
