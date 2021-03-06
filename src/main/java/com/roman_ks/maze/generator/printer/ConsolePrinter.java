@@ -56,7 +56,7 @@ public class ConsolePrinter implements Visitor {
 
         // draw bottom lane
         // └─┴─┘
-        drawLine(0, '┴', '─', '└', '┘');
+        drawLine(screenHeight - 1, '┴', '─', '└', '┘');
     }
 
     private void drawLine(int line, char even, char odd, char first, char last) {
