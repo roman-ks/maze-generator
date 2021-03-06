@@ -78,7 +78,7 @@ class GraphUtilsTest {
         // 2 3
         for (int i = 0; i < graph.size(); i++) {
             assertEquals(i, graph.get(i).getNumber());
-            assertEquals(2, graph.get(i).getConnected().size());
+            assertEquals(2, graph.get(i).getNeighbors().size());
         }
     }
 
@@ -93,9 +93,9 @@ class GraphUtilsTest {
         // 0 1 2
         // 3 4 5
         // 6 7 8
-        assertNodesHaveConnections(graph, 2, List.of(0, 2, 6, 8));
-        assertNodesHaveConnections(graph, 3, List.of(1, 3, 5, 7));
-        assertNodesHaveConnections(graph, 4, List.of(4));
+        assertNodesHaveNeighbors(graph, 2, List.of(0, 2, 6, 8));
+        assertNodesHaveNeighbors(graph, 3, List.of(1, 3, 5, 7));
+        assertNodesHaveNeighbors(graph, 4, List.of(4));
     }
 
     @Test
@@ -110,14 +110,14 @@ class GraphUtilsTest {
         // 4  5  6  7
         // 8  9  10 11
         // 12 13 14 15
-        assertNodesHaveConnections(graph, 2, List.of(0, 3, 12, 15));
-        assertNodesHaveConnections(graph, 3, List.of(1, 2, 4, 7, 8, 11, 13, 14));
-        assertNodesHaveConnections(graph, 4, List.of(5, 6, 9, 10));
+        assertNodesHaveNeighbors(graph, 2, List.of(0, 3, 12, 15));
+        assertNodesHaveNeighbors(graph, 3, List.of(1, 2, 4, 7, 8, 11, 13, 14));
+        assertNodesHaveNeighbors(graph, 4, List.of(5, 6, 9, 10));
     }
 
-    private void assertNodesHaveConnections(List<Node> graph, int connections, List<Integer> nodes) {
+    private void assertNodesHaveNeighbors(List<Node> graph, int connections, List<Integer> nodes) {
         for (int i : nodes) {
-            assertEquals(connections, graph.get(i).getConnected().size(),
+            assertEquals(connections, graph.get(i).getNeighbors().size(),
                     "Node " + i + " expected to have " + connections + " connection(s)");
         }
     }

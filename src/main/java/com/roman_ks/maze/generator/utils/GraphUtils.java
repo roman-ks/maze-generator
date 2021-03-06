@@ -33,7 +33,7 @@ public class GraphUtils {
             Node node = nodes.get(i);
             for (int j = 0; j < nodesCount; j++) {
                 if (matrix[i][j] == 1) {
-                    node.addEdge(nodes.get(j));
+                    node.addNeighbor(nodes.get(j));
                 }
             }
         }
