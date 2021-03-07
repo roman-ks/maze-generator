@@ -21,6 +21,6 @@ public class CenterEntranceSelector implements EntranceSelector {
         if (selectInTopLine)
             return nodeList.get(width / 2);
 
-        return nodeList.get((height - 1) * width - width / 2);
+        return nodeList.get((height * width - 1) - width / 2);
     }
 }
