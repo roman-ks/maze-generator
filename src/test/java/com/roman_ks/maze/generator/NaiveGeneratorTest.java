@@ -5,11 +5,12 @@ import com.roman_ks.maze.generator.model.RectMaze;
 import com.roman_ks.maze.generator.selector.CenterEntranceSelector;
 import com.roman_ks.maze.generator.selector.RandomNodeSelector;
 import com.roman_ks.maze.generator.visitor.ToStringVisitor;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class NaiveGeneratorTest {
 
-    //    @Disabled
+    @Disabled
     @Test
     void generateMaze_rect_3x3() {
         int width = 3;
