@@ -45,6 +45,7 @@ public class Node {
             throw new IllegalArgumentException("Node " + node + " is not a neighbor of the node " + this);
         }
         connected.add(node);
+        node.connected.add(this);
     }
 
     public List<Node> getNeighbors() {

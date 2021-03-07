@@ -1,4 +1,4 @@
-package com.roman_ks.maze.generator;
+package com.roman_ks.maze.generator.visitor;
 
 import com.roman_ks.maze.generator.model.RectMaze;
 
