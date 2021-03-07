@@ -32,6 +32,7 @@ public class Node {
 
     public void addEdge(Node node) {
         connected.add(node);
+        node.connected.add(this);
     }
 
     public List<Node> getNeighbors() {
