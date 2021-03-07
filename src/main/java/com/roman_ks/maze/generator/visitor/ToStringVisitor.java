@@ -4,6 +4,7 @@ import com.roman_ks.maze.generator.model.Node;
 import com.roman_ks.maze.generator.model.RectMaze;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ToStringVisitor implements Visitor {
 
@@ -26,8 +27,14 @@ public class ToStringVisitor implements Visitor {
         var nodeList = maze.getNodeList();
         makeConnections(nodeList);
 
-        openEntrance(maze.getEntrance().getNumber());
-        openEntrance(maze.getExit().getNumber());
+        // open entrance and exit
+        Optional.ofNullable(maze.getEntrance())
+                .map(Node::getNumber)
+                .ifPresent(this::openEntrance);
+
+        Optional.ofNullable(maze.getExit())
+                .map(Node::getNumber)
+                .ifPresent(this::openEntrance);
     }
 
     public String getScreenView() {
