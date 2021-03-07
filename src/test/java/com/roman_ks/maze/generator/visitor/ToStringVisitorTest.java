@@ -13,13 +13,13 @@ class ToStringVisitorTest {
         visitor.visitRectMaze(getMaze3x3());
 
         var maze = "" +
-                "┌─┬─┬─┐\n" +
+                "┌─┬ ┬─┐\n" +
                 "| |   |\n" +
                 "├─┼─┼ ┤\n" +
                 "|     |\n" +
                 "├ ┼─┼─┤\n" +
                 "|   | |\n" +
-                "└─┴─┴─┘\n";
+                "└─┴ ┴─┘\n";
         maze = maze.replaceAll("\n", System.lineSeparator());
 
         Assertions.assertEquals(maze, visitor.getScreenView());
@@ -36,6 +36,9 @@ class ToStringVisitorTest {
         nodeList.get(3).addEdge(nodeList.get(6));
         nodeList.get(6).addEdge(nodeList.get(7));
 
+        rectMaze.setEntrance(nodeList.get(1));
+        rectMaze.setExit(nodeList.get(7));
+
         return rectMaze;
     }
 
@@ -45,7 +48,7 @@ class ToStringVisitorTest {
         visitor.visitRectMaze(getMaze4x4());
 
         var maze = "" +
-                "┌─┬─┬─┬─┐\n" +
+                "┌─┬ ┬─┬─┐\n" +
                 "|   | | |\n" +
                 "├ ┼─┼─┼─┤\n" +
                 "|       |\n" +
@@ -53,7 +56,7 @@ class ToStringVisitorTest {
                 "| |     |\n" +
                 "├─┼ ┼─┼─┤\n" +
                 "| |   | |\n" +
-                "└─┴─┴─┴─┘\n";
+                "└─┴─┴ ┴─┘\n";
         maze = maze.replaceAll("\n", System.lineSeparator());
 
         Assertions.assertEquals(maze, visitor.getScreenView());
@@ -73,6 +76,9 @@ class ToStringVisitorTest {
         nodeList.get(10).addEdge(nodeList.get(9));
         nodeList.get(9).addEdge(nodeList.get(13));
         nodeList.get(13).addEdge(nodeList.get(14));
+
+        rectMaze.setEntrance(nodeList.get(1));
+        rectMaze.setExit(nodeList.get(14));
 
         return rectMaze;
     }

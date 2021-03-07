@@ -26,7 +26,8 @@ public class ToStringVisitor implements Visitor {
         var nodeList = maze.getNodeList();
         makeConnections(nodeList);
 
-        // todo open entrance and exit
+        openEntrance(maze.getEntrance().getNumber());
+        openEntrance(maze.getExit().getNumber());
     }
 
     public String getScreenView() {
@@ -41,13 +42,37 @@ public class ToStringVisitor implements Visitor {
         return builder.toString();
     }
 
+    private void openEntrance(int n) {
+        var cellCenterX = (getCellX(n)) * 2 + 1;
+        var cellCenterY = (getCellY(n)) * 2 + 1;
+
+        if (getCellY(n) == 0) {
+            // first lane, remove wall it the top
+            removeWallAt(cellCenterY - 1, cellCenterX);
+        } else if (getCellY(n) == height - 1) {
+            // last line, remove wall in the bottom
+            removeWallAt(cellCenterY + 1, cellCenterX);
+        } else if (getCellX(n) == 0) {
+            // last first in line, remove wall to the left
+            removeWallAt(cellCenterY, cellCenterX - 1);
+        } else if (getCellX(n) == wight - 1) {
+            // last cell in line, remove wall to the right
+            removeWallAt(cellCenterY, cellCenterX + 1);
+        } else {
+            var msg = String.format(
+                    "Can't open entrance for cell %d in %dx%d maze",
+                    n, height, wight);
+            throw new IllegalArgumentException(msg);
+        }
+    }
+
     private void makeConnections(List<Node> nodeList) {
         for (int i = 0; i < nodeList.size(); i++) {
             final var currNumber = i;
             nodeList.get(i).getConnected().stream()
                     .map(Node::getNumber)
                     .filter(n -> n > currNumber)
-                    .forEach(n -> removeWall(currNumber, n));
+                    .forEach(n -> removeWallBetweenCells(currNumber, n));
         }
     }
 
@@ -58,19 +83,23 @@ public class ToStringVisitor implements Visitor {
      * @param a first cell number
      * @param b second cell number, has not be greater then first cell number
      */
-    private void removeWall(int a, int b) {
+    private void removeWallBetweenCells(int a, int b) {
         int wallLocationX, wallLocationY;
         if (b - a == wight) {
             // b cell is below cell a
-            wallLocationX = (b % wight) * 2 + 1;
-            wallLocationY = (b / wight) * 2;
+            wallLocationX = (getCellX(b)) * 2 + 1;
+            wallLocationY = (getCellY(b)) * 2;
         } else {
             // b cell is to the left of a cell
-            wallLocationX = (b % wight) * 2;
-            wallLocationY = (b / wight) * 2 + 1;
+            wallLocationX = (getCellX(b)) * 2;
+            wallLocationY = (getCellY(b)) * 2 + 1;
         }
 
-        screen[wallLocationY][wallLocationX] = ' ';
+        removeWallAt(wallLocationY, wallLocationX);
+    }
+
+    private void removeWallAt(int y, int x) {
+        screen[y][x] = ' ';
     }
 
     private void createScreen() {
@@ -114,6 +143,14 @@ public class ToStringVisitor implements Visitor {
             }
         }
         screen[line][screenWidth - 1] = last;
+    }
+
+    private int getCellX(int n) {
+        return n % wight;
+    }
+
+    private int getCellY(int n) {
+        return n / wight;
     }
 
 }
