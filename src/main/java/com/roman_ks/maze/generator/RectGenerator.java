@@ -5,9 +5,7 @@ import com.roman_ks.maze.generator.model.Node;
 import com.roman_ks.maze.generator.model.RectMaze;
 import com.roman_ks.maze.generator.utils.GraphUtils;
 
-import java.util.Comparator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -29,33 +27,37 @@ public class RectGenerator extends AbstractGenerator {
         var matrix = GraphUtils.generateAdjacencyMatrixForRectangularMaze(width, height);
         var nodeList = GraphUtils.createGraph(matrix);
 
+        var maze = new RectMaze(width, height);
+        maze.setNodeList(nodeList);
+
         // get middle node from the top row
         var entrance = nodeList.get(width / 2);
+        maze.setEntrance(entrance);
 
         // mark entrance as visited
         entrance.setVisited(true);
         visitedNodes.add(entrance);
 
-        connectNextNode(entrance, visitedNodes);
-
-        while (visitedNodes.size() != nodeList.size()) {
-
-            // find nodes that have neighbor that hasn't been visited
-            var possibleToVisit = visitedNodes.stream()
-                    .filter(hasNotVisitedNeighbor())
-                    .collect(Collectors.toList());
+        List<Node> possibleToVisit;
+        while (!(possibleToVisit = getPossibleToVisit(visitedNodes)).isEmpty()) {
 
             var nodeToVisit = nodeSelector.selectNode(possibleToVisit);
             connectNextNode(nodeToVisit, visitedNodes);
+
         }
 
-        var maze = new RectMaze(width, height);
-        maze.setEntrance(entrance);
-        maze.setNodeList(nodeList);
         //todo set exit
         //maze.setExit();
 
         return maze;
+    }
+
+    private List<Node> getPossibleToVisit(Collection<Node> visited) {
+        // find nodes that have neighbor that hasn't been visited
+        return visited.stream()
+                .filter(hasNotVisitedNeighbor())
+                .collect(Collectors.toList());
+
     }
 
     private static Predicate<Node> hasNotVisitedNeighbor() {
@@ -76,5 +78,13 @@ public class RectGenerator extends AbstractGenerator {
         // set visited
         nodeToConnect.setVisited(true);
         visited.add(nodeToConnect);
+
+        // check if all neighbors are visited
+        var allNeighborsVisited = node.getNeighbors().stream()
+                .allMatch(Node::isVisited);
+        if (allNeighborsVisited) {
+            // make sure node won't be considered to be be visited again
+            visited.remove(node);
+        }
     }
 }
