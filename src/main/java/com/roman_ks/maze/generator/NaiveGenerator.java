@@ -5,8 +5,9 @@ import com.roman_ks.maze.generator.model.Node;
 import com.roman_ks.maze.generator.utils.GraphUtils;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import static java.util.function.Predicate.not;
 
 public class NaiveGenerator extends AbstractGenerator {
 
@@ -26,7 +27,6 @@ public class NaiveGenerator extends AbstractGenerator {
         maze.setEntrance(entrance);
 
         // mark entrance as visited
-        entrance.setVisited(true);
         visitedNodes.add(entrance);
 
         List<Node> possibleToVisit;
@@ -45,33 +45,26 @@ public class NaiveGenerator extends AbstractGenerator {
     private List<Node> getPossibleToVisit(Collection<Node> visited) {
         // find nodes that have neighbor that hasn't been visited
         return visited.stream()
-                .filter(hasNotVisitedNeighbor())
+                .filter(GraphUtils.hasNotVisitedNeighbor())
                 .collect(Collectors.toList());
 
-    }
-
-    private static Predicate<Node> hasNotVisitedNeighbor() {
-        return node -> node.getNeighbors()
-                .stream()
-                .anyMatch(Predicate.not(Node::isVisited));
     }
 
     private void connectNextNode(Node node, Set<Node> visited) {
         var unvisitedConnectedNodes = node.getNeighbors()
                 .stream()
-                .filter(Predicate.not(Node::isVisited))
+                .filter(not(GraphUtils.isConnected()))
                 .collect(Collectors.toList());
 
         var nodeToConnect = nodeSelector.selectNode(unvisitedConnectedNodes);
         node.addEdge(nodeToConnect);
 
         // set visited
-        nodeToConnect.setVisited(true);
         visited.add(nodeToConnect);
 
         // check if all neighbors are visited
         var allNeighborsVisited = node.getNeighbors().stream()
-                .allMatch(Node::isVisited);
+                .allMatch(GraphUtils.isConnected());
         if (allNeighborsVisited) {
             // make sure node won't be considered to be be visited again
             visited.remove(node);

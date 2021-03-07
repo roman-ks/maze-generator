@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
 public class GraphUtils {
@@ -73,6 +74,16 @@ public class GraphUtils {
         }
 
         return matrix;
+    }
+
+    public static Predicate<Node> hasNotVisitedNeighbor() {
+        return node -> node.getNeighbors()
+                .stream()
+                .anyMatch(GraphUtils.isConnected().negate());
+    }
+
+    public static Predicate<Node> isConnected() {
+        return node -> !node.getConnected().isEmpty();
     }
 
 }

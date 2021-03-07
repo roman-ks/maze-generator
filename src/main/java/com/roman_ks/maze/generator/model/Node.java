@@ -11,7 +11,6 @@ public class Node {
     private final int number;
     private final List<Node> connected;
     private final List<Node> neighbors;
-    private boolean visited;
 
     /**
      * Create node
@@ -33,17 +32,10 @@ public class Node {
         neighbors.add(node);
     }
 
-    public boolean isVisited() {
-        return visited;
-    }
-
-    public void setVisited(boolean visited) {
-        this.visited = visited;
-    }
-
     public void addEdge(Node node) {
         if (!neighbors.contains(node)) {
-            throw new IllegalArgumentException("Node " + node + " is not a neighbor of the node " + this);
+            throw new IllegalArgumentException(
+                    "Node " + node + " is not a neighbor of the node " + this);
         }
         connected.add(node);
         node.connected.add(this);
@@ -82,7 +74,6 @@ public class Node {
 
         return "Node{" +
                 "number=" + number +
-                ", visited=" + visited +
                 ", neighbors=" + neighborsStr +
                 ", connected=" + connectedStr +
                 "}";
