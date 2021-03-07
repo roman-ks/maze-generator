@@ -3,11 +3,12 @@ package com.roman_ks.maze.generator.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Node {
 
-    private int number;
+    private final int number;
     private final List<Node> connected;
     private final List<Node> neighbors;
     private boolean visited;
@@ -54,6 +55,16 @@ public class Node {
 
     public List<Node> getConnected() {
         return Collections.unmodifiableList(connected);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return this == o;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 
     @Override
