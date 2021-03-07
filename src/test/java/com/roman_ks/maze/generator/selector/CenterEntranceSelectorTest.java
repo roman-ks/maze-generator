@@ -27,28 +27,6 @@ class CenterEntranceSelectorTest {
         assertEquals(expected, nodeList.indexOf(selected));
     }
 
-    @ParameterizedTest
-    @CsvSource({"true,1", "false,7"})
-    void selectEntrance_4x4(boolean top, int expected) {
-        var selector = new CenterEntranceSelector(4, 4, top);
-        var nodeList = createList(4 * 4);
-
-        var selected = selector.selectEntrance(nodeList);
-
-        assertEquals(expected, nodeList.indexOf(selected));
-    }
-
-    @ParameterizedTest
-    @CsvSource({"true,1", "false,7"})
-    void selectEntrance_5x5(boolean top, int expected) {
-        var selector = new CenterEntranceSelector(3, 3, top);
-        var nodeList = createList(3 * 3);
-
-        var selected = selector.selectEntrance(nodeList);
-
-        assertEquals(expected, nodeList.indexOf(selected));
-    }
-
     private static List<Node> createList(int n) {
         return Stream.iterate(0, i -> i + 1)
                 .limit(n)
