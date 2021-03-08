@@ -17,9 +17,11 @@ pipeline {
         stage('Build & Test') {
             steps {
                 echo 'Building..'
+                updateGitlabCommitStatus(name: 'build', state: 'pending')
                 sh '''
                     gradle clean test
                 '''
+                updateGitlabCommitStatus(name: 'build', state: 'success')
             }
         }
 
