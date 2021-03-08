@@ -6,7 +6,7 @@ pipeline {
     }
 
     options{
-        gitlabConnection('gitlab-con')
+        gitLabConnection('gitlab-con')
     }
 
     triggers {
