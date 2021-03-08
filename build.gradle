@@ -1,16 +1,24 @@
 plugins {
-    id 'java'
+    id "java"
+    id "maven-publish"
 }
 
 group 'com.roman_ks.maze'
 version '0.0.1'
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+ext{
+    private_repo_username = System.getenv('private_repo_username')
+    private_repo_password = System.getenv('private_repo_password')
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.2'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
@@ -18,8 +26,22 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
-compileJava.options.encoding = 'UTF-8'
-compileTestJava.options.encoding = 'UTF-8'
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            credentials {
+                username = rootProject.ext.private_repo_username
+                password = rootProject.ext.private_repo_password
+            }
+            url = "https://repo.repsy.io/mvn/${rootProject.ext.private_repo_username}/default"
+        }
+    }
+}
 
 test {
     useJUnitPlatform()
