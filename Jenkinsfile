@@ -26,12 +26,17 @@ pipeline {
         }
 
         stage('Publish artifact') {
+//             when(
+//                 branch 'master'
+//             )
             steps {
                 echo 'Publishing....'
                 sh '''
-                    gradle publish
+                    version=$(git describe --tag | cut -b  2-)
+                    gradle -Pversion=$version publish
                 '''
             }
         }
+
     }
 }
