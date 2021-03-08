@@ -5,6 +5,14 @@ pipeline {
         }
     }
 
+    options{
+        gitlabConnection('gitlab-con')
+    }
+
+    triggers {
+        gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: 'All')
+    }
+
     stages {
         stage('Build & Test') {
             steps {
