@@ -25,9 +25,12 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Publish artifact') {
             steps {
-                echo 'Deploying....'
+                echo 'Publishing....'
+                sh '''
+                    gradle publish
+                '''
             }
         }
     }
