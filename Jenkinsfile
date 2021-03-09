@@ -32,7 +32,7 @@ pipeline {
             steps {
                 echo 'Publishing....'
                 sh '''
-                    version=$(git describe --tag | cut -b  2-)
+                    version=$(git describe  --abbrev=0 --tag | cut -b  2-)
                     gradle -Pversion=$version publish
                 '''
             }
