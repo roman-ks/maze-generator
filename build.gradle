@@ -4,7 +4,6 @@ plugins {
 }
 
 group 'com.roman_ks.maze'
-version '0.0.1'
 
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
