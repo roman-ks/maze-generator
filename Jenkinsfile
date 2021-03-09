@@ -26,7 +26,7 @@ pipeline {
         }
 
         stage('Publish artifact') {
-            when( branch 'master' )
+            when{ branch 'master' }
             steps {
                 echo 'Publishing....'
                 sh '''
