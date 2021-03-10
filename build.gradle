@@ -17,12 +17,15 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.2'
+def junitVersion = '5.7.1'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.7.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+dependencies {
+
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.12.2'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVersion}"
+
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 }
 
 publishing {
