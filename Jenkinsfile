@@ -13,15 +13,22 @@ pipeline {
         gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: 'All')
     }
 
+    post {
+          failure {
+            updateGitlabCommitStatus name: 'build', state: 'failed'
+          }
+          success {
+            updateGitlabCommitStatus name: 'build', state: 'success'
+          }
+    }
+
     stages {
         stage('Build & Test') {
             steps {
                 echo 'Building..'
-                updateGitlabCommitStatus(name: 'build', state: 'pending')
                 sh '''
                     gradle clean test
                 '''
-                updateGitlabCommitStatus(name: 'build', state: 'success')
             }
         }
 
