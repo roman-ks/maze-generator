@@ -1,13 +1,9 @@
 package com.roman_ks.maze.generator.selector;
 
-import com.roman_ks.maze.generator.model.Node;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
+import static com.roman_ks.maze.generator.utils.TestUtils.createList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CenterEntranceSelectorTest {
@@ -27,10 +23,4 @@ class CenterEntranceSelectorTest {
         assertEquals(expected, nodeList.indexOf(selected));
     }
 
-    private static List<Node> createList(int n) {
-        return Stream.iterate(0, i -> i + 1)
-                .limit(n)
-                .map(i -> new Node(i, 4))
-                .collect(Collectors.toList());
-    }
 }
