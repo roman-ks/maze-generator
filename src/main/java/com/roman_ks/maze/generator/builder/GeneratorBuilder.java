@@ -3,6 +3,7 @@ package com.roman_ks.maze.generator.builder;
 import com.roman_ks.maze.generator.AbstractGenerator;
 import com.roman_ks.maze.generator.Generator;
 import com.roman_ks.maze.generator.adjacency.AdjacencyMatrixGenerator;
+import com.roman_ks.maze.generator.model.Maze;
 import com.roman_ks.maze.generator.selector.EntranceSelector;
 import com.roman_ks.maze.generator.selector.NodeSelector;
 
@@ -13,6 +14,7 @@ public class GeneratorBuilder {
 
     private Supplier<AbstractGenerator> generatorSupplier;
     private AdjacencyMatrixGenerator matrixGenerator;
+    private Supplier<Maze> mazeSupplier;
     private NodeSelector nodeSelector;
     private EntranceSelector entranceSelector;
     private EntranceSelector exitSelector;
@@ -25,6 +27,11 @@ public class GeneratorBuilder {
     public GeneratorBuilder withAdjMatrixGenerator(
             AdjacencyMatrixGenerator matrixGenerator) {
         this.matrixGenerator = matrixGenerator;
+        return this;
+    }
+
+    public GeneratorBuilder withMazeSupplier(Supplier<Maze> mazeSupplier) {
+        this.mazeSupplier = mazeSupplier;
         return this;
     }
 
@@ -51,6 +58,10 @@ public class GeneratorBuilder {
         Objects.requireNonNull(matrixGenerator,
                 "Adjacency matrix generator has to be set!");
         generator.setMatrixGenerator(matrixGenerator);
+
+        Objects.requireNonNull(mazeSupplier,
+                "Maze supplier has to be set!");
+        generator.setMazeSupplier(mazeSupplier);
 
         Objects.requireNonNull(nodeSelector,
                 "Node selector has to be set!");
