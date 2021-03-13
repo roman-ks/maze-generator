@@ -1,7 +1,6 @@
-package com.roman_ks.maze.generator;
+package com.roman_ks.maze.generator.builder;
 
 import com.roman_ks.maze.generator.adjacency.RectAdjacencyMatrixGenerator;
-import com.roman_ks.maze.generator.builder.GeneratorBuilder;
 import com.roman_ks.maze.generator.selector.CenterEntranceSelector;
 import com.roman_ks.maze.generator.selector.RandomNodeSelector;
 import org.junit.jupiter.api.BeforeEach;
