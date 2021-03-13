@@ -1,5 +1,6 @@
 package com.roman_ks.maze.generator.builder;
 
+import com.roman_ks.maze.generator.NaiveGenerator;
 import com.roman_ks.maze.generator.adjacency.RectAdjacencyMatrixGenerator;
 import com.roman_ks.maze.generator.selector.CenterEntranceSelector;
 import com.roman_ks.maze.generator.selector.RandomNodeSelector;
@@ -15,11 +16,13 @@ class GeneratorBuilderTest {
 
     @BeforeEach
     void createBuilder() {
-        builder = GeneratorBuilder.builder();
+        builder = new GeneratorBuilder(NaiveGenerator::new);
     }
 
     @Test
     void noGenerator_exception() {
+        builder = new GeneratorBuilder(() -> null);
+
         var exception = assertThrows(NullPointerException.class, () -> builder.build());
         assertEquals(
                 "Generator type has to be set!",
@@ -28,8 +31,6 @@ class GeneratorBuilderTest {
 
     @Test
     void generatorSetNoMatrixGen_exception() {
-        builder.naiveGenerator();
-
         var exception = assertThrows(NullPointerException.class, () -> builder.build());
         assertEquals(
                 "Adjacency matrix generator has to be set!",
@@ -38,7 +39,6 @@ class GeneratorBuilderTest {
 
     @Test
     void generatorMatrixGenSetNoNodeSelector_exception() {
-        builder.naiveGenerator();
         builder.withAdjMatrixGenerator(new RectAdjacencyMatrixGenerator(1, 1));
 
         var exception = assertThrows(NullPointerException.class, () -> builder.build());
@@ -49,7 +49,6 @@ class GeneratorBuilderTest {
 
     @Test
     void generatorMatrixGenNodeSelectorSetNoEnter_exception() {
-        builder.naiveGenerator();
         builder.withAdjMatrixGenerator(new RectAdjacencyMatrixGenerator(1, 1));
         builder.withNodeSelector(new RandomNodeSelector());
 
@@ -61,7 +60,6 @@ class GeneratorBuilderTest {
 
     @Test
     void generatorMatrixGenNodeSelectorSetEnterNoExit_exception() {
-        builder.naiveGenerator();
         builder.withAdjMatrixGenerator(new RectAdjacencyMatrixGenerator(1, 1));
         builder.withNodeSelector(new RandomNodeSelector());
         builder.withEntranceSelector(new CenterEntranceSelector(1, 1, true));
@@ -74,7 +72,6 @@ class GeneratorBuilderTest {
 
     @Test
     void generatorMatrixGenNodeSelectorSetEnterExit() {
-        builder.naiveGenerator();
         builder.withAdjMatrixGenerator(new RectAdjacencyMatrixGenerator(1, 1));
         builder.withNodeSelector(new RandomNodeSelector());
         builder.withEntranceSelector(new CenterEntranceSelector(1, 1, true));
