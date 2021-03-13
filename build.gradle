@@ -8,7 +8,7 @@ group 'com.roman_ks.maze'
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 
-ext{
+ext {
     private_repo_username = System.getenv('private_repo_username')
     private_repo_password = System.getenv('private_repo_password')
 }
@@ -18,9 +18,12 @@ repositories {
 }
 
 def junitVersion = '5.7.1'
+def mockitoVersion = '3.8.0'
 
 dependencies {
 
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
     testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.12.2'
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVersion}"
