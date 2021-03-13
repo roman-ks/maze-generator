@@ -1,10 +1,15 @@
 package com.roman_ks.maze.generator.utils;
 
+import com.roman_ks.maze.generator.model.Node;
+
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TestUtils {
 
@@ -18,6 +23,13 @@ public class TestUtils {
         } catch (URISyntaxException e) {
             throw new IllegalStateException(e);
         }
+    }
+
+    public static List<Node> createList(int n) {
+        return Stream.iterate(0, i -> i + 1)
+                .limit(n)
+                .map(i -> new Node(i, 4))
+                .collect(Collectors.toList());
     }
 
 }
