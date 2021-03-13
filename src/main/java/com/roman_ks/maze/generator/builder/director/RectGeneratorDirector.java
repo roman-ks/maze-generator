@@ -51,8 +51,8 @@ public class RectGeneratorDirector {
                 .withAdjMatrixGenerator(new RectAdjacencyMatrixGenerator(width, height))
                 .withMazeSupplier(() -> new RectMaze(width, height))
                 .withNodeSelector(new RandomNodeSelector(seed))
-                .withEntranceSelector(new CenterEntranceSelector(width, height, true))
-                .withExitSelector(new CenterEntranceSelector(width, height, false))
+                .withEntranceSelector(new EdgeEntranceSelector(true))
+                .withExitSelector(new EdgeEntranceSelector(false))
                 .build();
     }
 
