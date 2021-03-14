@@ -1,3 +1,19 @@
+def getRepoURL() {
+  sh "git config --get remote.origin.url > .git/remote-url"
+  return readFile(".git/remote-url").trim()
+}
+
+void setBuildStatus(String message, String state) {
+  repoUrl = getRepoURL()
+  step([
+      $class: "GitHubCommitStatusSetter",
+      reposSource: [$class: "ManuallyEnteredRepositorySource", url: repoUrl],
+      contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "ci/jenkins/build-status"],
+      errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
+      statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
+  ]);
+}
+
 pipeline {
     agent {
         docker {
@@ -5,21 +21,13 @@ pipeline {
         }
     }
 
-    options{
-        gitLabConnection('gitlab-con')
-    }
-
-    triggers {
-        gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: 'All')
-    }
-
     post {
-          failure {
-            updateGitlabCommitStatus name: 'build', state: 'failed'
-          }
-          success {
-            updateGitlabCommitStatus name: 'build', state: 'success'
-          }
+        failure {
+            setBuildStatus("Build failed", "FAILURE");
+        }
+        success {
+            setBuildStatus("Build succeeded", "SUCCESS");
+        }
     }
 
     stages {
