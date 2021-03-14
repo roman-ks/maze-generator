@@ -14,7 +14,7 @@ Generation process:
 1. Create adjacency matrix for desired graph type and size. The graph represented by the matrix will look like this (
    rectangular type, 3x3 size):
 
-   ![rectangular 3x3 graph](start graph.png)
+   ![rectangular 3x3 graph](graph.png)
 
 2. Create list of nodes, make each node aware of its neighbors according to the matrix from step 1.
 
