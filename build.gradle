@@ -48,6 +48,10 @@ publishing {
     }
 }
 
+jar {
+    from "LICENSE"
+}
+
 test {
     useJUnitPlatform()
 
