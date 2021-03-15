@@ -17,7 +17,7 @@ void setBuildStatus(String message, String state) {
 pipeline {
     agent {
         docker {
-            image 'myregistry/gradle:jdk11'
+            image 'myregistry:5000/gradle:jdk11'
             label 'local-gradle-jdk11'
             registryUrl 'https://myregistry/'
         }
