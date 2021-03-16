@@ -7,9 +7,9 @@ hexagonal, etc.)
 
 NaiveGenerator is the only one implementation of a Generator available.
 
-## Naive generator
+## Maze generation process
 
-Generation process:
+First steps are the same for all generator implementation.
 
 1. Create adjacency matrix for desired graph type and size. The graph represented by the matrix will look like this (
    rectangular type, 3x3 size):
@@ -19,6 +19,10 @@ Generation process:
 2. Create list of nodes, make each node aware of its neighbors according to the matrix from step 1.
 
 3. Select entrance and exit nodes
+
+Next steps differ for each implementation
+
+### Naive generator
 
 4. Add entrance node to the list of `visited nodes`.
 
@@ -37,6 +41,11 @@ Generation process:
     from `visited nodes` list.
 
 11. Go to step 5.
+
+### Backtracking generator
+
+Uses algorithm described
+on [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Iterative_implementation)
 
 ## Prerequisites
 
