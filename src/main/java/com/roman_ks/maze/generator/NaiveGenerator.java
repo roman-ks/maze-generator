@@ -15,16 +15,8 @@ public class NaiveGenerator extends AbstractGenerator {
     public Maze generateMaze() {
         var visitedNodes = new TreeSet<>(Comparator.comparing(Node::getNumber));
 
-        // create connected graph
-        var matrix = matrixGenerator.generateAdjMatrix();
-        var nodeList = GraphUtils.createGraph(matrix);
-
-        var maze = mazeSupplier.get();
-        maze.setNodeList(nodeList);
-
-        // get middle node from the top row
-        var entrance = entranceSelector.selectEntrance(nodeList);
-        maze.setEntrance(entrance);
+        var maze = createMazeTemplate();
+        var entrance = maze.getEntrance();
 
         // mark entrance as visited
         visitedNodes.add(entrance);
@@ -36,8 +28,6 @@ public class NaiveGenerator extends AbstractGenerator {
             connectNextNode(nodeToVisit, visitedNodes);
 
         }
-
-        maze.setExit(exitSelector.selectEntrance(nodeList));
 
         return maze;
     }

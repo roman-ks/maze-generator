@@ -7,9 +7,9 @@ hexagonal, etc.)
 
 NaiveGenerator is the only one implementation of a Generator available.
 
-## Naive generator
+## Maze generation process
 
-Generation process:
+First steps are the same for all generator implementation.
 
 1. Create adjacency matrix for desired graph type and size. The graph represented by the matrix will look like this (
    rectangular type, 3x3 size):
@@ -18,25 +18,34 @@ Generation process:
 
 2. Create list of nodes, make each node aware of its neighbors according to the matrix from step 1.
 
-3. Select entrance node and add it to the list of `visited nodes`.
+3. Select entrance and exit nodes
 
-4. For each node in the list of `visited nodes` check if it has not connected neighbors. All nodes that satisfy filter
+Next steps differ for each implementation
+
+### Naive generator
+
+4. Add entrance node to the list of `visited nodes`.
+
+5. For each node in the list of `visited nodes` check if it has not connected neighbors. All nodes that satisfy filter
    criteria are placed in `possible to visit` list.
 
-5. If `possible to visit` list contains nodes do steps 6 - 10, else go to step 11.
+6. If `possible to visit` list contains nodes do steps 7 - 11, else return result.
 
-6. Select node to visit from the `possible to visit` list.
+7. Select node to visit from the `possible to visit` list.
 
-7. Make list of `unvisited neighbors` for the selected node.
+8. Make list of `unvisited neighbors` for the selected node.
 
-8. Select node from `unvisited neighbors` and make connection to it. Add connected neighbor to the `visited nodes` list.
+9. Select node from `unvisited neighbors` and make connection to it. Add connected neighbor to the `visited nodes` list.
 
-9. Check if node selected on step 6 has not connected neighbors. If no unconnected neighbors left, remove node
-   from `visited nodes` list.
+10. Check if node selected on step 6 has not connected neighbors. If no unconnected neighbors left, remove node
+    from `visited nodes` list.
 
-10. Go to step 4.
+11. Go to step 5.
 
-11. Select exit node.
+### Backtracking generator
+
+Uses algorithm described
+on [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Iterative_implementation)
 
 ## Prerequisites
 

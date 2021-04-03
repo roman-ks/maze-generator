@@ -12,14 +12,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-class NaiveGeneratorTest {
+class BacktrackingGeneratorTest {
 
     @Test
     void generateMaze_oneSolution() {
         int width = 20;
         int height = 20;
 
-        var builder = new GeneratorBuilder(NaiveGenerator::new);
+        var builder = new GeneratorBuilder(BacktrackingGenerator::new);
         var director = new RectGeneratorDirector(builder);
         var generator = director.edgesAndRandomNodeSelector(width, height, 1L);
 
@@ -30,11 +30,12 @@ class NaiveGeneratorTest {
 
     @Disabled
     @Test
-    void generateMaze_rect_3x3() {
-        int width = 3;
-        int height = 3;
+    void generateMaze() {
 
-        var generator = new NaiveGenerator();
+        int width = 20;
+        int height = 8;
+
+        var generator = new BacktrackingGenerator();
         generator.setMatrixGenerator(new RectAdjacencyMatrixGenerator(width, height));
         generator.setMazeSupplier(() -> new RectMaze(width, height));
         generator.setNodeSelector(new RandomNodeSelector(1L));
@@ -50,5 +51,6 @@ class NaiveGeneratorTest {
         maze.acceptVisitor(visitor);
 
         System.out.println(visitor.getScreenView());
+
     }
 }
