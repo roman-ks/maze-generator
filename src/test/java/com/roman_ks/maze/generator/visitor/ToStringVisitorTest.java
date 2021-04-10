@@ -1,5 +1,6 @@
 package com.roman_ks.maze.generator.visitor;
 
+import com.roman_ks.maze.generator.adjacency.RectAdjacencyMatrixGenerator;
 import com.roman_ks.maze.generator.model.RectMaze;
 import com.roman_ks.maze.generator.utils.GraphUtils;
 import org.junit.jupiter.api.Assertions;
@@ -86,8 +87,8 @@ class ToStringVisitorTest {
     private RectMaze getNodeList(int w, int h) {
         var rectMaze = new RectMaze(w, h);
 
-        var matrix = GraphUtils.
-                generateAdjacencyMatrixForRectangularMaze(w, h);
+        var adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(w, h);
+        var matrix = adjacencyMatrixGenerator.generateAdjMatrix();
         var nodeList = GraphUtils.createGraph(matrix);
         rectMaze.setNodeList(nodeList);
 
