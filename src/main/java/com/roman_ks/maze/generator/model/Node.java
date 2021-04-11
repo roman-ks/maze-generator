@@ -15,13 +15,12 @@ public class Node {
     /**
      * Create node
      *
-     * @param number   unique node number within the graph
-     * @param maxEdges maximum number of edges
+     * @param number unique node number within the graph
      */
-    public Node(int number, int maxEdges) {
+    public Node(int number) {
         this.number = number;
-        connected = new ArrayList<>(maxEdges);
-        neighbors = new ArrayList<>(maxEdges);
+        connected = new ArrayList<>();
+        neighbors = new ArrayList<>();
     }
 
     public int getNumber() {

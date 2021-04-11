@@ -5,15 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.roman_ks.maze.generator.model.Node;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class GraphUtilsTest {
 
@@ -33,20 +28,6 @@ class GraphUtilsTest {
     private static int[][] loadMatrix(String path) throws JsonProcessingException {
         var json = TestUtils.readResource(path);
         return mapper.readValue(json, int[][].class);
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideMaxEdgesArgs")
-    void maxEdges(int expected, int[][] matrix) {
-        var maxEdges = GraphUtils.maxEdges(matrix);
-        assertEquals(expected, maxEdges);
-    }
-
-    private static Stream<Arguments> provideMaxEdgesArgs() {
-        return Stream.of(
-                arguments(2, adjacencyMatrix2x2),
-                arguments(4, adjacencyMatrix3x3),
-                arguments(4, adjacencyMatrix4x4));
     }
 
     @Test
