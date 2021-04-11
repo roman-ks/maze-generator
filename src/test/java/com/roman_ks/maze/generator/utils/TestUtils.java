@@ -28,7 +28,7 @@ public class TestUtils {
     public static List<Node> createList(int n) {
         return Stream.iterate(0, i -> i + 1)
                 .limit(n)
-                .map(i -> new Node(i, 4))
+                .map(Node::new)
                 .collect(Collectors.toList());
     }
 

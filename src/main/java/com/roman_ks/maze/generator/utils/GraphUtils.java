@@ -3,11 +3,9 @@ package com.roman_ks.maze.generator.utils;
 import com.roman_ks.maze.generator.model.Node;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.IntStream;
 
 public class GraphUtils {
 
@@ -20,12 +18,11 @@ public class GraphUtils {
     public static List<Node> createGraph(int[][] matrix) {
         var nodesCount = matrix.length;
 
-        var edges = maxEdges(matrix);
 
         // create nodes without edges
         var nodes = new ArrayList<Node>(nodesCount);
         for (int i = 0; i < nodesCount; i++) {
-            var node = new Node(i, edges);
+            var node = new Node(i);
             nodes.add(node);
         }
 
@@ -42,19 +39,10 @@ public class GraphUtils {
         return Collections.unmodifiableList(nodes);
     }
 
-    public static int maxEdges(int[][] matrix) {
-        return Arrays.stream(matrix)
-                .map(Arrays::stream)
-                .map(IntStream::sum)
-                .mapToInt(Integer::intValue)
-                .max()
-                .orElse(0);
-    }
-
     public static Predicate<Node> hasNotVisitedNeighbor() {
         return node -> node.getNeighbors()
                 .stream()
-                .anyMatch(GraphUtils.isConnected().negate());
+                .anyMatch(isConnected().negate());
     }
 
     public static Predicate<Node> isConnected() {
