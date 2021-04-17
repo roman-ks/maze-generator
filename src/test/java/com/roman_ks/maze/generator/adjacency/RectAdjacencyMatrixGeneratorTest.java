@@ -35,15 +35,15 @@ class RectAdjacencyMatrixGeneratorTest {
     }
 
     private static int[][] loadMatrix(String path) throws JsonProcessingException {
-        var json = TestUtils.readResource(path);
+        String json = TestUtils.readResource(path);
         return mapper.readValue(json, int[][].class);
     }
 
     @ParameterizedTest
     @MethodSource("provideAdjacentMatrixArgs")
     void generateAdjacencyMatrixForRectangularMaze_square(int size, int[][] expectedMatrix) {
-        var adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(size, size);
-        var matrix = adjacencyMatrixGenerator.generateAdjMatrix();
+        RectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(size, size);
+        int[][] matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
         assertEquals(size * size, matrix.length);
         assertEquals(size * size, matrix[0].length);
@@ -60,10 +60,10 @@ class RectAdjacencyMatrixGeneratorTest {
 
     @Test
     void generateAdjacencyMatrixForRectangularMaze_notSquare() {
-        var w = 10;
-        var h = 5;
-        var adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(w, h);
-        var matrix = adjacencyMatrixGenerator.generateAdjMatrix();
+        int w = 10;
+        int h = 5;
+        RectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(w, h);
+        int[][] matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
         assertEquals(w * h, matrix.length);
         assertEquals(w * h, matrix[0].length);
@@ -75,10 +75,10 @@ class RectAdjacencyMatrixGeneratorTest {
     @ParameterizedTest
     @ValueSource(ints = {2, 3, 4, 5})
     void generateAdjacencyMatrixForRectangularMaze(int size) {
-        var adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(size, size);
-        var matrix = adjacencyMatrixGenerator.generateAdjMatrix();
+        RectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(size, size);
+        int[][] matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
-        var mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
         try {
             System.out.println(mapper.writeValueAsString(matrix));
         } catch (JsonProcessingException e) {

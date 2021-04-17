@@ -51,7 +51,7 @@ public class GeneratorBuilder {
     }
 
     public Generator build() {
-        var generator = generatorSupplier.get();
+        AbstractGenerator generator = generatorSupplier.get();
         Objects.requireNonNull(generator,
                 "Generator type has to be set!");
 

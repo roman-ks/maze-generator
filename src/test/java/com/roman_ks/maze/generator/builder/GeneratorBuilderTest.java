@@ -1,6 +1,7 @@
 package com.roman_ks.maze.generator.builder;
 
 import com.roman_ks.maze.generator.AbstractGenerator;
+import com.roman_ks.maze.generator.Generator;
 import com.roman_ks.maze.generator.adjacency.AdjacencyMatrixGenerator;
 import com.roman_ks.maze.generator.model.Maze;
 import com.roman_ks.maze.generator.selector.EntranceSelector;
@@ -44,7 +45,7 @@ class GeneratorBuilderTest {
     void noGenerator_exception() {
         builder = new GeneratorBuilder(() -> null);
 
-        var exception = assertThrows(
+        NullPointerException exception = assertThrows(
                 NullPointerException.class,
                 () -> builder.build());
         assertEquals(
@@ -54,7 +55,7 @@ class GeneratorBuilderTest {
 
     @Test
     void generatorSetNoMatrixGen_exception() {
-        var exception = assertThrows(
+        NullPointerException exception = assertThrows(
                 NullPointerException.class,
                 () -> builder.build());
         assertEquals(
@@ -66,7 +67,7 @@ class GeneratorBuilderTest {
     void generatorMatrixGenSetNoMazeSupplier_exception() {
         builder.withAdjMatrixGenerator(matrixGenerator);
 
-        var exception = assertThrows(
+        NullPointerException exception = assertThrows(
                 NullPointerException.class,
                 () -> builder.build());
         assertEquals(
@@ -79,7 +80,7 @@ class GeneratorBuilderTest {
         builder.withAdjMatrixGenerator(matrixGenerator)
                 .withMazeSupplier(mazeSupplier);
 
-        var exception = assertThrows(
+        NullPointerException exception = assertThrows(
                 NullPointerException.class,
                 () -> builder.build());
         assertEquals(
@@ -93,7 +94,7 @@ class GeneratorBuilderTest {
                 .withMazeSupplier(mazeSupplier)
                 .withNodeSelector(nodeSelector);
 
-        var exception = assertThrows(
+        NullPointerException exception = assertThrows(
                 NullPointerException.class,
                 () -> builder.build());
         assertEquals(
@@ -108,7 +109,7 @@ class GeneratorBuilderTest {
                 .withNodeSelector(nodeSelector)
                 .withEntranceSelector(entranceSelector);
 
-        var exception = assertThrows(
+        NullPointerException exception = assertThrows(
                 NullPointerException.class,
                 () -> builder.build());
         assertEquals(
@@ -118,7 +119,7 @@ class GeneratorBuilderTest {
 
     @Test
     void generatorMatrixGenMazeSupplierNodeSelectorEnterExitSet() {
-        var generator = builder.withAdjMatrixGenerator(matrixGenerator)
+        Generator generator = builder.withAdjMatrixGenerator(matrixGenerator)
                 .withMazeSupplier(mazeSupplier)
                 .withNodeSelector(nodeSelector)
                 .withEntranceSelector(entranceSelector)

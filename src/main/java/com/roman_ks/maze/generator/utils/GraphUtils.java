@@ -16,13 +16,13 @@ public class GraphUtils {
      * @return node list of the generated graph
      */
     public static List<Node> createGraph(int[][] matrix) {
-        var nodesCount = matrix.length;
+        int nodesCount = matrix.length;
 
 
         // create nodes without edges
-        var nodes = new ArrayList<Node>(nodesCount);
+        ArrayList<Node> nodes = new ArrayList<Node>(nodesCount);
         for (int i = 0; i < nodesCount; i++) {
-            var node = new Node(i);
+            Node node = new Node(i);
             nodes.add(node);
         }
 

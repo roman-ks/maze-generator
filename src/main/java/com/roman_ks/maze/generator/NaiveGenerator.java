@@ -13,10 +13,10 @@ public class NaiveGenerator extends AbstractGenerator {
 
     @Override
     public Maze generateMaze() {
-        var visitedNodes = new TreeSet<>(Comparator.comparing(Node::getNumber));
+        TreeSet<Node> visitedNodes = new TreeSet<>(Comparator.comparing(Node::getNumber));
 
-        var maze = createMazeTemplate();
-        var entrance = maze.getEntrance();
+        Maze maze = createMazeTemplate();
+        Node entrance = maze.getEntrance();
 
         // mark entrance as visited
         visitedNodes.add(entrance);
@@ -24,7 +24,7 @@ public class NaiveGenerator extends AbstractGenerator {
         List<Node> possibleToVisit;
         while (!(possibleToVisit = getPossibleToVisit(visitedNodes)).isEmpty()) {
 
-            var nodeToVisit = nodeSelector.selectNode(possibleToVisit);
+            Node nodeToVisit = nodeSelector.selectNode(possibleToVisit);
             connectNextNode(nodeToVisit, visitedNodes);
 
         }
@@ -41,19 +41,19 @@ public class NaiveGenerator extends AbstractGenerator {
     }
 
     private void connectNextNode(Node node, Set<Node> visited) {
-        var unvisitedConnectedNodes = node.getNeighbors()
+        List<Node> unvisitedConnectedNodes = node.getNeighbors()
                 .stream()
                 .filter(not(GraphUtils.isConnected()))
                 .collect(Collectors.toList());
 
-        var nodeToConnect = nodeSelector.selectNode(unvisitedConnectedNodes);
+        Node nodeToConnect = nodeSelector.selectNode(unvisitedConnectedNodes);
         node.addEdge(nodeToConnect);
 
         // set visited
         visited.add(nodeToConnect);
 
         // check if all neighbors are visited
-        var allNeighborsVisited = node.getNeighbors().stream()
+        boolean allNeighborsVisited = node.getNeighbors().stream()
                 .allMatch(GraphUtils.isConnected());
         if (allNeighborsVisited) {
             // make sure node won't be considered to be be visited again

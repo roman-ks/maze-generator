@@ -24,7 +24,7 @@ public class ToStringVisitor implements Visitor {
         wight = maze.getWight();
         createScreen();
 
-        var nodeList = maze.getNodeList();
+        List<Node> nodeList = maze.getNodeList();
         makeConnections(nodeList);
 
         // open entrance and exit
@@ -50,8 +50,8 @@ public class ToStringVisitor implements Visitor {
     }
 
     private void openEntrance(int n) {
-        var cellCenterX = (getCellX(n)) * 2 + 1;
-        var cellCenterY = (getCellY(n)) * 2 + 1;
+        int cellCenterX = (getCellX(n)) * 2 + 1;
+        int cellCenterY = (getCellY(n)) * 2 + 1;
 
         if (getCellY(n) == 0) {
             // first lane, remove wall it the top
@@ -66,7 +66,7 @@ public class ToStringVisitor implements Visitor {
             // last cell in line, remove wall to the right
             removeWallAt(cellCenterY, cellCenterX + 1);
         } else {
-            var msg = String.format(
+            String msg = String.format(
                     "Can't open entrance for cell %d in %dx%d maze",
                     n, height, wight);
             throw new IllegalArgumentException(msg);
@@ -75,7 +75,7 @@ public class ToStringVisitor implements Visitor {
 
     private void makeConnections(List<Node> nodeList) {
         for (int i = 0; i < nodeList.size(); i++) {
-            final var currNumber = i;
+            final int currNumber = i;
             nodeList.get(i).getConnected().stream()
                     .map(Node::getNumber)
                     .filter(n -> n > currNumber)

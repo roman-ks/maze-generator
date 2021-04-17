@@ -2,10 +2,12 @@ package com.roman_ks.maze.generator;
 
 import com.roman_ks.maze.generator.adjacency.AdjacencyMatrixGenerator;
 import com.roman_ks.maze.generator.model.Maze;
+import com.roman_ks.maze.generator.model.Node;
 import com.roman_ks.maze.generator.selector.EntranceSelector;
 import com.roman_ks.maze.generator.selector.NodeSelector;
 import com.roman_ks.maze.generator.utils.GraphUtils;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public abstract class AbstractGenerator implements Generator {
@@ -41,10 +43,10 @@ public abstract class AbstractGenerator implements Generator {
      * @return
      */
     protected Maze createMazeTemplate() {
-        var maze = mazeSupplier.get();
+        Maze maze = mazeSupplier.get();
 
-        var matrix = matrixGenerator.generateAdjMatrix();
-        var nodeList = GraphUtils.createGraph(matrix);
+        int[][] matrix = matrixGenerator.generateAdjMatrix();
+        List<Node> nodeList = GraphUtils.createGraph(matrix);
         maze.setNodeList(nodeList);
 
         maze.setEntrance(entranceSelector.selectEntrance(nodeList));
