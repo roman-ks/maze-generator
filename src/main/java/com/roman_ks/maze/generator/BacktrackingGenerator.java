@@ -13,23 +13,23 @@ public class BacktrackingGenerator extends AbstractGenerator {
 
     @Override
     public Maze generateMaze() {
-        var stack = new LinkedList<Node>();
+        LinkedList<Node> stack = new LinkedList<Node>();
 
-        var maze = createMazeTemplate();
-        var entrance = maze.getEntrance();
+        Maze maze = createMazeTemplate();
+        Node entrance = maze.getEntrance();
 
         stack.push(entrance);
 
         while (!stack.isEmpty()) {
-            var node = stack.peek();
+            Node node = stack.peek();
 
-            var neighbours = getNotConnectedNeighbours(node);
+            List<Node> neighbours = getNotConnectedNeighbours(node);
             if (neighbours.isEmpty()) {
                 stack.poll();
                 continue;
             }
 
-            var nextToConnect = nodeSelector.selectNode(neighbours);
+            Node nextToConnect = nodeSelector.selectNode(neighbours);
             node.addEdge(nextToConnect);
             stack.push(nextToConnect);
         }

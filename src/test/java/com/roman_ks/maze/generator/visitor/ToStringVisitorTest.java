@@ -1,19 +1,22 @@
 package com.roman_ks.maze.generator.visitor;
 
 import com.roman_ks.maze.generator.adjacency.RectAdjacencyMatrixGenerator;
+import com.roman_ks.maze.generator.model.Node;
 import com.roman_ks.maze.generator.model.RectMaze;
 import com.roman_ks.maze.generator.utils.GraphUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 class ToStringVisitorTest {
 
     @Test
     void visitRectMaze_3x3() {
-        var visitor = new ToStringVisitor();
+        ToStringVisitor visitor = new ToStringVisitor();
         visitor.visitRectMaze(getMaze3x3());
 
-        var maze = "" +
+        String maze = "" +
                 "┌─┬ ┬─┐\n" +
                 "| |   |\n" +
                 "├─┼─┼ ┤\n" +
@@ -27,8 +30,8 @@ class ToStringVisitorTest {
     }
 
     private RectMaze getMaze3x3() {
-        var rectMaze = getNodeList(3, 3);
-        var nodeList = rectMaze.getNodeList();
+        RectMaze rectMaze = getNodeList(3, 3);
+        List<Node> nodeList = rectMaze.getNodeList();
 
         nodeList.get(1).addEdge(nodeList.get(2));
         nodeList.get(2).addEdge(nodeList.get(5));
@@ -45,10 +48,10 @@ class ToStringVisitorTest {
 
     @Test
     void visitRectMaze_4x4() {
-        var visitor = new ToStringVisitor();
+        ToStringVisitor visitor = new ToStringVisitor();
         visitor.visitRectMaze(getMaze4x4());
 
-        var maze = "" +
+        String maze = "" +
                 "┌─┬ ┬─┬─┐\n" +
                 "|   | | |\n" +
                 "├ ┼─┼─┼─┤\n" +
@@ -64,8 +67,8 @@ class ToStringVisitorTest {
     }
 
     private RectMaze getMaze4x4() {
-        var rectMaze = getNodeList(4, 4);
-        var nodeList = rectMaze.getNodeList();
+        RectMaze rectMaze = getNodeList(4, 4);
+        List<Node> nodeList = rectMaze.getNodeList();
 
         nodeList.get(1).addEdge(nodeList.get(0));
         nodeList.get(0).addEdge(nodeList.get(4));
@@ -85,11 +88,11 @@ class ToStringVisitorTest {
     }
 
     private RectMaze getNodeList(int w, int h) {
-        var rectMaze = new RectMaze(w, h);
+        RectMaze rectMaze = new RectMaze(w, h);
 
-        var adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(w, h);
-        var matrix = adjacencyMatrixGenerator.generateAdjMatrix();
-        var nodeList = GraphUtils.createGraph(matrix);
+        RectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(w, h);
+        int[][] matrix = adjacencyMatrixGenerator.generateAdjMatrix();
+        List<Node> nodeList = GraphUtils.createGraph(matrix);
         rectMaze.setNodeList(nodeList);
 
         return rectMaze;

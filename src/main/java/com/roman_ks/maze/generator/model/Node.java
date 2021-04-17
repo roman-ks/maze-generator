@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Node {
@@ -60,13 +61,13 @@ public class Node {
 
     @Override
     public String toString() {
-        var arrayStringCollector = Collectors.joining(", ", "[ ", "]");
-        var neighborsStr = neighbors.stream()
+        Collector<CharSequence, ?, String> arrayStringCollector = Collectors.joining(", ", "[ ", "]");
+        String neighborsStr = neighbors.stream()
                 .map(Node::getNumber)
                 .map(String::valueOf)
                 .collect(arrayStringCollector);
 
-        var connectedStr = connected.stream()
+        String connectedStr = connected.stream()
                 .map(Node::getNumber)
                 .map(String::valueOf)
                 .collect(arrayStringCollector);

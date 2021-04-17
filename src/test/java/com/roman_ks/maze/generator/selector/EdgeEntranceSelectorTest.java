@@ -15,18 +15,18 @@ class EdgeEntranceSelectorTest {
 
     @Test
     void first_firstSelected() {
-        var selector = new EdgeEntranceSelector(true);
+        EdgeEntranceSelector selector = new EdgeEntranceSelector(true);
 
-        var selected = selector.selectEntrance(nodeList);
+        Node selected = selector.selectEntrance(nodeList);
 
         assertEquals(0, nodeList.indexOf(selected));
     }
 
     @Test
     void notFirst_firstSelected() {
-        var selector = new EdgeEntranceSelector(false);
+        EdgeEntranceSelector selector = new EdgeEntranceSelector(false);
 
-        var selected = selector.selectEntrance(nodeList);
+        Node selected = selector.selectEntrance(nodeList);
 
         assertEquals(size - 1, nodeList.indexOf(selected));
     }

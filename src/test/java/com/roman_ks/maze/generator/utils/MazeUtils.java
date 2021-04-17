@@ -14,15 +14,15 @@ public class MazeUtils {
 
     public static int countSolutions(Maze maze) {
         int solutions = 0;
-        var stack = new LinkedList<Node>();
-        var visited = new HashSet<Node>();
+        LinkedList<Node> stack = new LinkedList<Node>();
+        HashSet<Node> visited = new HashSet<Node>();
 
-        var entrance = maze.getEntrance();
+        Node entrance = maze.getEntrance();
         stack.push(entrance);
-        var exit = maze.getExit();
+        Node exit = maze.getExit();
 
         while (!stack.isEmpty()) {
-            var node = stack.poll();
+            Node node = stack.poll();
             visited.add(node);
 
             if (node.equals(exit)) {

@@ -3,6 +3,7 @@ package com.roman_ks.maze.generator;
 import com.roman_ks.maze.generator.adjacency.RectAdjacencyMatrixGenerator;
 import com.roman_ks.maze.generator.builder.GeneratorBuilder;
 import com.roman_ks.maze.generator.builder.director.RectGeneratorDirector;
+import com.roman_ks.maze.generator.model.Maze;
 import com.roman_ks.maze.generator.model.RectMaze;
 import com.roman_ks.maze.generator.selector.CenterEntranceSelector;
 import com.roman_ks.maze.generator.selector.RandomNodeSelector;
@@ -19,11 +20,11 @@ class NaiveGeneratorTest {
         int width = 20;
         int height = 20;
 
-        var builder = new GeneratorBuilder(NaiveGenerator::new);
-        var director = new RectGeneratorDirector(builder);
-        var generator = director.edgesAndRandomNodeSelector(width, height, 1L);
+        GeneratorBuilder builder = new GeneratorBuilder(NaiveGenerator::new);
+        RectGeneratorDirector director = new RectGeneratorDirector(builder);
+        Generator generator = director.edgesAndRandomNodeSelector(width, height, 1L);
 
-        var maze = generator.generateMaze();
+        Maze maze = generator.generateMaze();
 
         Assertions.assertEquals(1, MazeUtils.countSolutions(maze));
     }
@@ -34,19 +35,19 @@ class NaiveGeneratorTest {
         int width = 3;
         int height = 3;
 
-        var generator = new NaiveGenerator();
+        NaiveGenerator generator = new NaiveGenerator();
         generator.setMatrixGenerator(new RectAdjacencyMatrixGenerator(width, height));
         generator.setMazeSupplier(() -> new RectMaze(width, height));
         generator.setNodeSelector(new RandomNodeSelector(1L));
 
-        var entranceSelector = new CenterEntranceSelector(width, height, true);
-        var exitSelector = new CenterEntranceSelector(width, height, false);
+        CenterEntranceSelector entranceSelector = new CenterEntranceSelector(width, height, true);
+        CenterEntranceSelector exitSelector = new CenterEntranceSelector(width, height, false);
         generator.setEntranceSelector(entranceSelector);
         generator.setExitSelector(exitSelector);
 
-        var visitor = new ToStringVisitor();
+        ToStringVisitor visitor = new ToStringVisitor();
 
-        var maze = generator.generateMaze();
+        Maze maze = generator.generateMaze();
         maze.acceptVisitor(visitor);
 
         System.out.println(visitor.getScreenView());

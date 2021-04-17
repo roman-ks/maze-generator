@@ -26,13 +26,13 @@ class GraphUtilsTest {
     }
 
     private static int[][] loadMatrix(String path) throws JsonProcessingException {
-        var json = TestUtils.readResource(path);
+        String json = TestUtils.readResource(path);
         return mapper.readValue(json, int[][].class);
     }
 
     @Test
     void createGraph_2x2() {
-        var graph = GraphUtils.createGraph(adjacencyMatrix2x2);
+        List<Node> graph = GraphUtils.createGraph(adjacencyMatrix2x2);
 
         // 0 1
         // 2 3
@@ -44,7 +44,7 @@ class GraphUtilsTest {
 
     @Test
     void createGraph_3x3() {
-        var graph = GraphUtils.createGraph(adjacencyMatrix3x3);
+        List<Node> graph = GraphUtils.createGraph(adjacencyMatrix3x3);
 
         for (int i = 0; i < graph.size(); i++) {
             assertEquals(i, graph.get(i).getNumber());
@@ -60,7 +60,7 @@ class GraphUtilsTest {
 
     @Test
     void createGraph_4x4() {
-        var graph = GraphUtils.createGraph(adjacencyMatrix4x4);
+        List<Node> graph = GraphUtils.createGraph(adjacencyMatrix4x4);
 
         for (int i = 0; i < graph.size(); i++) {
             assertEquals(i, graph.get(i).getNumber());
