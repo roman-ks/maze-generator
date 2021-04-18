@@ -6,7 +6,6 @@ import com.roman_ks.maze.generator.utils.GraphUtils;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class BacktrackingGenerator extends AbstractGenerator {
@@ -39,7 +38,7 @@ public class BacktrackingGenerator extends AbstractGenerator {
 
     private List<Node> getNotConnectedNeighbours(Node node) {
         return node.getNeighbors().stream()
-                .filter(Predicate.not(GraphUtils.isConnected()))
+                .filter(GraphUtils.isConnected().negate())
                 .collect(Collectors.toList());
     }
 }

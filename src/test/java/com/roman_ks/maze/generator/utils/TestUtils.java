@@ -6,8 +6,9 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,7 +19,8 @@ public class TestUtils {
         URL resourceUrl = TestUtils.class.getClassLoader().getResource(path);
 
         try {
-            return Files.readString(Path.of(resourceUrl.toURI()));
+            byte[] bytes = Files.readAllBytes(Paths.get(resourceUrl.toURI()));
+            return new String(bytes, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         } catch (URISyntaxException e) {
