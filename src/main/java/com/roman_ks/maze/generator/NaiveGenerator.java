@@ -7,8 +7,6 @@ import com.roman_ks.maze.generator.utils.GraphUtils;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.function.Predicate.not;
-
 public class NaiveGenerator extends AbstractGenerator {
 
     @Override
@@ -43,7 +41,7 @@ public class NaiveGenerator extends AbstractGenerator {
     private void connectNextNode(Node node, Set<Node> visited) {
         List<Node> unvisitedConnectedNodes = node.getNeighbors()
                 .stream()
-                .filter(not(GraphUtils.isConnected()))
+                .filter(GraphUtils.isConnected().negate())
                 .collect(Collectors.toList());
 
         Node nodeToConnect = nodeSelector.selectNode(unvisitedConnectedNodes);

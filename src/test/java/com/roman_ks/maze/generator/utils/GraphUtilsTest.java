@@ -6,6 +6,7 @@ import com.roman_ks.maze.generator.model.Node;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -53,9 +54,9 @@ class GraphUtilsTest {
         // 0 1 2
         // 3 4 5
         // 6 7 8
-        assertNodesHaveNeighbors(graph, 2, List.of(0, 2, 6, 8));
-        assertNodesHaveNeighbors(graph, 3, List.of(1, 3, 5, 7));
-        assertNodesHaveNeighbors(graph, 4, List.of(4));
+        assertNodesHaveNeighbors(graph, 2, Arrays.asList(0, 2, 6, 8));
+        assertNodesHaveNeighbors(graph, 3, Arrays.asList(1, 3, 5, 7));
+        assertNodesHaveNeighbors(graph, 4, Arrays.asList(4));
     }
 
     @Test
@@ -70,9 +71,9 @@ class GraphUtilsTest {
         // 4  5  6  7
         // 8  9  10 11
         // 12 13 14 15
-        assertNodesHaveNeighbors(graph, 2, List.of(0, 3, 12, 15));
-        assertNodesHaveNeighbors(graph, 3, List.of(1, 2, 4, 7, 8, 11, 13, 14));
-        assertNodesHaveNeighbors(graph, 4, List.of(5, 6, 9, 10));
+        assertNodesHaveNeighbors(graph, 2, Arrays.asList(0, 3, 12, 15));
+        assertNodesHaveNeighbors(graph, 3, Arrays.asList(1, 2, 4, 7, 8, 11, 13, 14));
+        assertNodesHaveNeighbors(graph, 4, Arrays.asList(5, 6, 9, 10));
     }
 
     private void assertNodesHaveNeighbors(List<Node> graph, int connections, List<Integer> nodes) {

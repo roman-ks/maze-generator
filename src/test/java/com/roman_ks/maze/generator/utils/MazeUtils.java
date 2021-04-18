@@ -17,6 +17,9 @@ public class MazeUtils {
         LinkedList<Node> stack = new LinkedList<Node>();
         HashSet<Node> visited = new HashSet<Node>();
 
+        Predicate<Node> visitedContains = visited::contains;
+        Predicate<Node> visitedNotContains = visitedContains.negate();
+
         Node entrance = maze.getEntrance();
         stack.push(entrance);
         Node exit = maze.getExit();
@@ -31,10 +34,11 @@ public class MazeUtils {
             }
 
             node.getConnected().stream()
-                    .filter(Predicate.not(visited::contains))
+                    .filter(visitedNotContains)
                     .forEach(stack::push);
         }
 
         return solutions;
     }
+
 }
