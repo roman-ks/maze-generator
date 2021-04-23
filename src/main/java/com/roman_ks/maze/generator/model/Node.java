@@ -41,10 +41,23 @@ public class Node {
         node.connected.add(this);
     }
 
+    /**
+     * Neighbors are nodes adjacent to this one.
+     * Neighbor nodes are not necessary connected, but they are connectable. See {@code getConnected()}
+     *
+     * @return list of adjacent nodes
+     * @see Node#getConnected()
+     */
     public List<Node> getNeighbors() {
         return Collections.unmodifiableList(neighbors);
     }
 
+
+    /**
+     * Nodes are connected to this one if there is no "wall" between them.
+     *
+     * @return list of connected nodes
+     */
     public List<Node> getConnected() {
         return Collections.unmodifiableList(connected);
     }
