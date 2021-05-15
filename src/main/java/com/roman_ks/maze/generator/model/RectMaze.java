@@ -1,7 +1,5 @@
 package com.roman_ks.maze.generator.model;
 
-import com.roman_ks.maze.generator.visitor.Visitor;
-
 public class RectMaze extends Maze {
     private final int wight;
     private final int height;
@@ -19,8 +17,4 @@ public class RectMaze extends Maze {
         return height;
     }
 
-    @Override
-    public void acceptVisitor(Visitor v) {
-        v.visitRectMaze(this);
-    }
 }

@@ -49,7 +49,7 @@ class BacktrackingGeneratorTest {
         ToStringVisitor visitor = new ToStringVisitor();
 
         Maze maze = generator.generateMaze();
-        maze.acceptVisitor(visitor);
+        visitor.visitRectMaze((RectMaze) maze);
 
         System.out.println(visitor.getScreenView());
 
