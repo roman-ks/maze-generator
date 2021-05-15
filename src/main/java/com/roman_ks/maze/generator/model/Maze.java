@@ -2,7 +2,7 @@ package com.roman_ks.maze.generator.model;
 
 import java.util.List;
 
-public abstract class Maze {
+public class Maze {
 
     private Node entrance;
     private Node exit;
