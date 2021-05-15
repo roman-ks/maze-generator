@@ -4,6 +4,7 @@ import com.roman_ks.maze.generator.Generator;
 import com.roman_ks.maze.generator.NaiveGenerator;
 import com.roman_ks.maze.generator.builder.GeneratorBuilder;
 import com.roman_ks.maze.generator.model.Maze;
+import com.roman_ks.maze.generator.model.RectMaze;
 import com.roman_ks.maze.generator.visitor.ToStringVisitor;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class RectGeneratorDirectorTest {
         ToStringVisitor visitor = new ToStringVisitor();
 
         Maze maze = generator.generateMaze();
-        maze.acceptVisitor(visitor);
+        visitor.visitRectMaze((RectMaze) maze);
 
         System.out.println(visitor.getScreenView());
     }
@@ -37,7 +38,7 @@ class RectGeneratorDirectorTest {
         ToStringVisitor visitor = new ToStringVisitor();
 
         Maze maze = generator.generateMaze();
-        maze.acceptVisitor(visitor);
+        visitor.visitRectMaze((RectMaze) maze);
 
         System.out.println(visitor.getScreenView());
     }

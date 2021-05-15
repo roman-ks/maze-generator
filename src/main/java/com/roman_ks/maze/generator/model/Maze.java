@@ -1,7 +1,5 @@
 package com.roman_ks.maze.generator.model;
 
-import com.roman_ks.maze.generator.visitor.Visitor;
-
 import java.util.List;
 
 public abstract class Maze {
@@ -34,5 +32,4 @@ public abstract class Maze {
         this.nodeList = nodeList;
     }
 
-    public abstract void acceptVisitor(Visitor v);
 }
