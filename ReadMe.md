@@ -96,7 +96,7 @@ Use Generator by calling `generateMaze()` method on it.
 
 ### Write a maze to String
 
-ToStringVisitor can be used to create a String with the maze. It relies on box drawing Unicode characters so make sure
+ToStringVisitor can be used to create a String with the maze. It is available in test directory. It relies on box drawing Unicode characters so make sure
 output destination supports UTF-8.
 
 Only rectangular mazes supported for now.
@@ -106,7 +106,7 @@ Here's how to write a maze in the console.
 ```
 var maze; // assign some value
 var visitor = new ToStringVisitor();
-maze.acceptVisitor(visitor);
+visitor.visitRectMaze((RectMaze) maze);
 System.out.println(visitor.getScreenView());
 ```
 
@@ -126,4 +126,4 @@ Output example
 
 ## License
 
-This project is release under [MIT license](LICENSE)
+This project is released under [MIT license](LICENSE)
