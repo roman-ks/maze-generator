@@ -2,7 +2,6 @@ package com.roman_ks.maze.generator.adjacency;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.roman_ks.maze.generator.utils.TestUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -13,13 +12,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
+import static com.roman_ks.maze.generator.adjacency.AdjacencyUtil.loadMatrix;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class RectAdjacencyMatrixGeneratorTest {
-
-    private static final ObjectMapper mapper = new ObjectMapper();
 
     private static int[][] adjacencyMatrix2x2;
     private static int[][] adjacencyMatrix3x3;
@@ -28,15 +26,10 @@ class RectAdjacencyMatrixGeneratorTest {
 
     @BeforeAll
     public static void loadMatrices() throws JsonProcessingException {
-        adjacencyMatrix2x2 = loadMatrix("matrices/2x2.json");
-        adjacencyMatrix3x3 = loadMatrix("matrices/3x3.json");
-        adjacencyMatrix4x4 = loadMatrix("matrices/4x4.json");
-        adjacencyMatrix10x5 = loadMatrix("matrices/10x5.json");
-    }
-
-    private static int[][] loadMatrix(String path) throws JsonProcessingException {
-        String json = TestUtils.readResource(path);
-        return mapper.readValue(json, int[][].class);
+        adjacencyMatrix2x2 = loadMatrix("matrices/rect/2x2.json");
+        adjacencyMatrix3x3 = loadMatrix("matrices/rect/3x3.json");
+        adjacencyMatrix4x4 = loadMatrix("matrices/rect/4x4.json");
+        adjacencyMatrix10x5 = loadMatrix("matrices/rect/10x5.json");
     }
 
     @ParameterizedTest

@@ -21,9 +21,9 @@ class GraphUtilsTest {
 
     @BeforeAll
     public static void loadMatrices() throws JsonProcessingException {
-        adjacencyMatrix2x2 = loadMatrix("matrices/2x2.json");
-        adjacencyMatrix3x3 = loadMatrix("matrices/3x3.json");
-        adjacencyMatrix4x4 = loadMatrix("matrices/4x4.json");
+        adjacencyMatrix2x2 = loadMatrix("matrices/rect/2x2.json");
+        adjacencyMatrix3x3 = loadMatrix("matrices/rect/3x3.json");
+        adjacencyMatrix4x4 = loadMatrix("matrices/rect/4x4.json");
     }
 
     private static int[][] loadMatrix(String path) throws JsonProcessingException {
