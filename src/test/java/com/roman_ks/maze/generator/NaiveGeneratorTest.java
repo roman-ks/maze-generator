@@ -1,7 +1,6 @@
 package com.roman_ks.maze.generator;
 
 import com.roman_ks.maze.generator.adjacency.RectAdjacencyMatrixGenerator;
-import com.roman_ks.maze.generator.builder.GeneratorBuilder;
 import com.roman_ks.maze.generator.builder.director.RectGeneratorDirector;
 import com.roman_ks.maze.generator.model.Maze;
 import com.roman_ks.maze.generator.model.RectMaze;

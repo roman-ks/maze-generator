@@ -9,6 +9,12 @@ import java.util.stream.Collectors;
 
 public class NaiveGenerator extends AbstractGenerator {
 
+    /**
+     * Package-private constructor to allow instantiation only in GeneratorBuilder
+     */
+    NaiveGenerator() {
+    }
+
     @Override
     public Maze generateMaze() {
         TreeSet<Node> visitedNodes = new TreeSet<>(Comparator.comparing(Node::getNumber));

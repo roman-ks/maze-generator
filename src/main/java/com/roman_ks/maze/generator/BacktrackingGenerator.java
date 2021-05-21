@@ -10,6 +10,12 @@ import java.util.stream.Collectors;
 
 public class BacktrackingGenerator extends AbstractGenerator {
 
+    /**
+     * Package-private constructor to allow instantiation only in GeneratorBuilder
+     */
+    public BacktrackingGenerator() {
+    }
+
     @Override
     public Maze generateMaze() {
         LinkedList<Node> stack = new LinkedList<Node>();

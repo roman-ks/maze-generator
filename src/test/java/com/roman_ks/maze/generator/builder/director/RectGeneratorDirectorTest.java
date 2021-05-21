@@ -1,8 +1,7 @@
 package com.roman_ks.maze.generator.builder.director;
 
 import com.roman_ks.maze.generator.Generator;
-import com.roman_ks.maze.generator.NaiveGenerator;
-import com.roman_ks.maze.generator.builder.GeneratorBuilder;
+import com.roman_ks.maze.generator.GeneratorBuilder;
 import com.roman_ks.maze.generator.model.Maze;
 import com.roman_ks.maze.generator.model.RectMaze;
 import com.roman_ks.maze.generator.visitor.ToStringVisitor;
@@ -14,7 +13,7 @@ class RectGeneratorDirectorTest {
     @Disabled
     @Test
     void centersAndRandomNodeSelector() {
-        GeneratorBuilder builder = new GeneratorBuilder(NaiveGenerator::new);
+        GeneratorBuilder builder = GeneratorBuilder.naive();
         RectGeneratorDirector director = new RectGeneratorDirector(builder);
 
         Generator generator = director.centersAndRandomNodeSelector(3, 3, 1L);
@@ -30,7 +29,7 @@ class RectGeneratorDirectorTest {
     @Disabled
     @Test
     void edgesAndRandomNodeSelector() {
-        GeneratorBuilder builder = new GeneratorBuilder(NaiveGenerator::new);
+        GeneratorBuilder builder = GeneratorBuilder.naive();
         RectGeneratorDirector director = new RectGeneratorDirector(builder);
 
         Generator generator = director.edgesAndRandomNodeSelector(3, 3, 1L);
