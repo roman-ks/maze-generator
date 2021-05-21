@@ -1,7 +1,5 @@
-package com.roman_ks.maze.generator.builder;
+package com.roman_ks.maze.generator;
 
-import com.roman_ks.maze.generator.AbstractGenerator;
-import com.roman_ks.maze.generator.Generator;
 import com.roman_ks.maze.generator.adjacency.AdjacencyMatrixGenerator;
 import com.roman_ks.maze.generator.model.Maze;
 import com.roman_ks.maze.generator.selector.EntranceSelector;
@@ -38,19 +36,7 @@ class GeneratorBuilderTest {
     @BeforeEach
     void createBuilder() {
         generatorSupplier = () -> Mockito.mock(AbstractGenerator.class);
-        builder = new GeneratorBuilder(generatorSupplier);
-    }
-
-    @Test
-    void noGenerator_exception() {
-        builder = new GeneratorBuilder(() -> null);
-
-        NullPointerException exception = assertThrows(
-                NullPointerException.class,
-                () -> builder.build());
-        assertEquals(
-                "Generator type has to be set!",
-                exception.getMessage());
+        builder = GeneratorBuilder.naive();
     }
 
     @Test
@@ -60,31 +46,6 @@ class GeneratorBuilderTest {
                 () -> builder.build());
         assertEquals(
                 "Adjacency matrix generator has to be set!",
-                exception.getMessage());
-    }
-
-    @Test
-    void generatorMatrixGenSetNoMazeSupplier_exception() {
-        builder.withAdjMatrixGenerator(matrixGenerator);
-
-        NullPointerException exception = assertThrows(
-                NullPointerException.class,
-                () -> builder.build());
-        assertEquals(
-                "Maze supplier has to be set!",
-                exception.getMessage());
-    }
-
-    @Test
-    void generatorMatrixGenMazeSupplierSetNoNodeSelector_exception() {
-        builder.withAdjMatrixGenerator(matrixGenerator)
-                .withMazeSupplier(mazeSupplier);
-
-        NullPointerException exception = assertThrows(
-                NullPointerException.class,
-                () -> builder.build());
-        assertEquals(
-                "Node selector has to be set!",
                 exception.getMessage());
     }
 
@@ -122,6 +83,23 @@ class GeneratorBuilderTest {
         Generator generator = builder.withAdjMatrixGenerator(matrixGenerator)
                 .withMazeSupplier(mazeSupplier)
                 .withNodeSelector(nodeSelector)
+                .withEntranceSelector(entranceSelector)
+                .withExitSelector(exitSelector)
+                .build();
+    }
+
+    @Test
+    void generatorMatrixGenNodeSelectorEnterExitSet() {
+        builder.withAdjMatrixGenerator(matrixGenerator)
+                .withNodeSelector(nodeSelector)
+                .withEntranceSelector(entranceSelector)
+                .withExitSelector(exitSelector)
+                .build();
+    }
+
+    @Test
+    void generatorWithDefaults() {
+        builder.withAdjMatrixGenerator(matrixGenerator)
                 .withEntranceSelector(entranceSelector)
                 .withExitSelector(exitSelector)
                 .build();

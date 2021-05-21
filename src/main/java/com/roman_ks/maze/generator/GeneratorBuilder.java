@@ -1,18 +1,18 @@
-package com.roman_ks.maze.generator.builder;
+package com.roman_ks.maze.generator;
 
-import com.roman_ks.maze.generator.AbstractGenerator;
-import com.roman_ks.maze.generator.Generator;
 import com.roman_ks.maze.generator.adjacency.AdjacencyMatrixGenerator;
 import com.roman_ks.maze.generator.model.Maze;
 import com.roman_ks.maze.generator.selector.EntranceSelector;
 import com.roman_ks.maze.generator.selector.NodeSelector;
+import com.roman_ks.maze.generator.selector.RandomNodeSelector;
 
-import java.util.Objects;
 import java.util.function.Supplier;
+
+import static java.util.Objects.requireNonNull;
 
 public class GeneratorBuilder {
 
-    private Supplier<AbstractGenerator> generatorSupplier;
+    private final Supplier<AbstractGenerator> generatorSupplier;
     private AdjacencyMatrixGenerator matrixGenerator;
     private Supplier<Maze> mazeSupplier;
     private NodeSelector nodeSelector;
@@ -20,8 +20,22 @@ public class GeneratorBuilder {
     private EntranceSelector exitSelector;
 
 
-    public GeneratorBuilder(Supplier<AbstractGenerator> generatorSupplier) {
+    GeneratorBuilder(Supplier<AbstractGenerator> generatorSupplier) {
         this.generatorSupplier = generatorSupplier;
+        setDefaults();
+    }
+
+    private void setDefaults(){
+        mazeSupplier = Maze::new;
+        nodeSelector = new RandomNodeSelector();
+    }
+
+    public static GeneratorBuilder naive(){
+        return new GeneratorBuilder(NaiveGenerator::new);
+    }
+
+    public static GeneratorBuilder backtracking(){
+        return new GeneratorBuilder(BacktrackingGenerator::new);
     }
 
     public GeneratorBuilder withAdjMatrixGenerator(
@@ -31,12 +45,12 @@ public class GeneratorBuilder {
     }
 
     public GeneratorBuilder withMazeSupplier(Supplier<Maze> mazeSupplier) {
-        this.mazeSupplier = mazeSupplier;
+        this.mazeSupplier = requireNonNull(mazeSupplier);
         return this;
     }
 
     public GeneratorBuilder withNodeSelector(NodeSelector nodeSelector) {
-        this.nodeSelector = nodeSelector;
+        this.nodeSelector = requireNonNull(nodeSelector);;
         return this;
     }
 
@@ -52,26 +66,21 @@ public class GeneratorBuilder {
 
     public Generator build() {
         AbstractGenerator generator = generatorSupplier.get();
-        Objects.requireNonNull(generator,
+        requireNonNull(generator,
                 "Generator type has to be set!");
 
-        Objects.requireNonNull(matrixGenerator,
+        requireNonNull(matrixGenerator,
                 "Adjacency matrix generator has to be set!");
         generator.setMatrixGenerator(matrixGenerator);
 
-        Objects.requireNonNull(mazeSupplier,
-                "Maze supplier has to be set!");
         generator.setMazeSupplier(mazeSupplier);
-
-        Objects.requireNonNull(nodeSelector,
-                "Node selector has to be set!");
         generator.setNodeSelector(nodeSelector);
 
-        Objects.requireNonNull(entranceSelector,
+        requireNonNull(entranceSelector,
                 "Entrance selector has to be set!");
         generator.setEntranceSelector(entranceSelector);
 
-        Objects.requireNonNull(exitSelector,
+        requireNonNull(exitSelector,
                 "Exit selector has to be set!");
         generator.setExitSelector(exitSelector);
 
