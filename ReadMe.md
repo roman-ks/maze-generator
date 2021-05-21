@@ -70,24 +70,11 @@ var generator = director.centersAndRandomNodeSelector(3, 3, 1L);
 2. Use GeneratorBuilder
 
 ```
-var generator = new GeneratorBuilder(NaiveGenerator::new)
+var generator = GeneratorBuilder.naive()
                 .withAdjMatrixGenerator(new RectAdjacencyMatrixGenerator(width, height))
-                .withMazeSupplier(() -> new RectMaze(width, height))
-                .withNodeSelector(new RandomNodeSelector())
                 .withEntranceSelector(new CenterEntranceSelector(width, height, true))
                 .withExitSelector(new CenterEntranceSelector(width, height, false))
                 .build();
-```
-
-3. Init available Generator directly
-
-```
-var generator = new NaiveGenerator();
-generator.setMatrixGenerator(new RectAdjacencyMatrixGenerator(width, height));
-generator.setMazeSupplier(() -> new RectMaze(width, height));
-generator.setNodeSelector(new RandomNodeSelector(1L));
-generator.setEntranceSelector(new CenterEntranceSelector(width, height, true));
-generator.setExitSelector(CenterEntranceSelector(width, height, false));
 ```
 
 Use Generator by calling `generateMaze()` method on it.
