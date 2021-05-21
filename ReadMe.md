@@ -57,17 +57,8 @@ To start maze generation one has to decide on each of the following things.
 
 ## Create and use Generator
 
-There are multiple ways to create Generator object:
-
-1. Use available Director
-
-```
-var builder = new GeneratorBuilder(NaiveGenerator::new);
-var director = new RectGeneratorDirector(builder);
-var generator = director.centersAndRandomNodeSelector(3, 3, 1L);
-```
-
-2. Use GeneratorBuilder
+There is one convenient way to create Generator object.  
+Here's how you use GeneratorBuilder to crete Generator: 
 
 ```
 var generator = GeneratorBuilder.naive()
