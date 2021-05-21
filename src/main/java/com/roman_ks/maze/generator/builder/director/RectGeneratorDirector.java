@@ -6,7 +6,6 @@ import com.roman_ks.maze.generator.adjacency.RectAdjacencyMatrixGenerator;
 import com.roman_ks.maze.generator.model.RectMaze;
 import com.roman_ks.maze.generator.selector.CenterEntranceSelector;
 import com.roman_ks.maze.generator.selector.EdgeEntranceSelector;
-import com.roman_ks.maze.generator.selector.RandomNodeSelector;
 
 public class RectGeneratorDirector {
 
@@ -20,7 +19,6 @@ public class RectGeneratorDirector {
         return builder
                 .withAdjMatrixGenerator(new RectAdjacencyMatrixGenerator(width, height))
                 .withMazeSupplier(() -> new RectMaze(width, height))
-                .withNodeSelector(new RandomNodeSelector())
                 .withEntranceSelector(new CenterEntranceSelector(width, height, true))
                 .withExitSelector(new CenterEntranceSelector(width, height, false))
                 .build();
@@ -30,7 +28,6 @@ public class RectGeneratorDirector {
         return builder
                 .withAdjMatrixGenerator(new RectAdjacencyMatrixGenerator(width, height))
                 .withMazeSupplier(() -> new RectMaze(width, height))
-                .withNodeSelector(new RandomNodeSelector(seed))
                 .withEntranceSelector(new CenterEntranceSelector(width, height, true))
                 .withExitSelector(new CenterEntranceSelector(width, height, false))
                 .build();
@@ -40,7 +37,6 @@ public class RectGeneratorDirector {
         return builder
                 .withAdjMatrixGenerator(new RectAdjacencyMatrixGenerator(width, height))
                 .withMazeSupplier(() -> new RectMaze(width, height))
-                .withNodeSelector(new RandomNodeSelector())
                 .withEntranceSelector(new EdgeEntranceSelector(true))
                 .withExitSelector(new EdgeEntranceSelector(false))
                 .build();
@@ -50,7 +46,6 @@ public class RectGeneratorDirector {
         return builder
                 .withAdjMatrixGenerator(new RectAdjacencyMatrixGenerator(width, height))
                 .withMazeSupplier(() -> new RectMaze(width, height))
-                .withNodeSelector(new RandomNodeSelector(seed))
                 .withEntranceSelector(new EdgeEntranceSelector(true))
                 .withExitSelector(new EdgeEntranceSelector(false))
                 .build();
