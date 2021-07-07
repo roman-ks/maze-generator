@@ -1,5 +1,6 @@
 package com.roman_ks.maze.generator.utils;
 
+import com.roman_ks.maze.generator.model.AdjMatrix;
 import com.roman_ks.maze.generator.model.Node;
 
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ public class GraphUtils {
      * @param matrix adjacency matrix
      * @return node list of the generated graph
      */
-    public static List<Node> createGraph(int[][] matrix) {
-        int nodesCount = matrix.length;
+    public static List<Node> createGraph(AdjMatrix matrix) {
+        int nodesCount = matrix.size();
 
 
         // create nodes without edges
@@ -30,7 +31,7 @@ public class GraphUtils {
         for (int i = 0; i < nodesCount; i++) {
             Node node = nodes.get(i);
             for (int j = 0; j < nodesCount; j++) {
-                if (matrix[i][j] == 1) {
+                if (matrix.get(i,j)) {
                     node.addNeighbor(nodes.get(j));
                 }
             }

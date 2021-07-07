@@ -1,6 +1,7 @@
 package com.roman_ks.maze.generator.visitor;
 
 import com.roman_ks.maze.generator.adjacency.RectAdjacencyMatrixGenerator;
+import com.roman_ks.maze.generator.model.AdjMatrix;
 import com.roman_ks.maze.generator.model.Node;
 import com.roman_ks.maze.generator.model.RectMaze;
 import com.roman_ks.maze.generator.utils.GraphUtils;
@@ -91,7 +92,7 @@ class ToStringVisitorTest {
         RectMaze rectMaze = new RectMaze(w, h);
 
         RectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(w, h);
-        int[][] matrix = adjacencyMatrixGenerator.generateAdjMatrix();
+        AdjMatrix matrix = adjacencyMatrixGenerator.generateAdjMatrix();
         List<Node> nodeList = GraphUtils.createGraph(matrix);
         rectMaze.setNodeList(nodeList);
 

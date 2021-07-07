@@ -1,6 +1,7 @@
 package com.roman_ks.maze.generator;
 
 import com.roman_ks.maze.generator.adjacency.AdjacencyMatrixGenerator;
+import com.roman_ks.maze.generator.model.AdjMatrix;
 import com.roman_ks.maze.generator.model.Maze;
 import com.roman_ks.maze.generator.model.Node;
 import com.roman_ks.maze.generator.selector.EntranceSelector;
@@ -45,7 +46,7 @@ public abstract class AbstractGenerator implements Generator {
     protected Maze createMazeTemplate() {
         Maze maze = mazeSupplier.get();
 
-        int[][] matrix = matrixGenerator.generateAdjMatrix();
+        AdjMatrix matrix = matrixGenerator.generateAdjMatrix();
         List<Node> nodeList = GraphUtils.createGraph(matrix);
         maze.setNodeList(nodeList);
 
