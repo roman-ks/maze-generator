@@ -1,7 +1,8 @@
 package com.roman_ks.maze.generator.adjacency;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.roman_ks.maze.generator.model.AdjMatrix;
+import com.roman_ks.maze.generator.utils.TestUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -12,17 +13,16 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static com.roman_ks.maze.generator.adjacency.AdjacencyUtil.loadMatrix;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static com.roman_ks.maze.generator.utils.TestUtils.loadMatrix;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class RectAdjacencyMatrixGeneratorTest {
+class RectAdjMatrixGeneratorTest {
 
-    private static int[][] adjacencyMatrix2x2;
-    private static int[][] adjacencyMatrix3x3;
-    private static int[][] adjacencyMatrix4x4;
-    private static int[][] adjacencyMatrix10x5;
+    private static AdjMatrix adjacencyMatrix2x2;
+    private static AdjMatrix adjacencyMatrix3x3;
+    private static AdjMatrix adjacencyMatrix4x4;
+    private static AdjMatrix adjacencyMatrix10x5;
 
     @BeforeAll
     public static void loadMatrices() throws JsonProcessingException {
@@ -34,14 +34,13 @@ class RectAdjacencyMatrixGeneratorTest {
 
     @ParameterizedTest
     @MethodSource("provideAdjacentMatrixArgs")
-    void generateAdjacencyMatrixForRectangularMaze_square(int size, int[][] expectedMatrix) {
-        RectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(size, size);
-        int[][] matrix = adjacencyMatrixGenerator.generateAdjMatrix();
+    void generateAdjacencyMatrixForRectangularMaze_square(int size, AdjMatrix expectedMatrix) {
+        RectAdjMatrixGenerator adjacencyMatrixGenerator = new RectAdjMatrixGenerator(size, size);
+        AdjMatrix matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
-        assertEquals(size * size, matrix.length);
-        assertEquals(size * size, matrix[0].length);
+        assertEquals(size * size, matrix.size());
 
-        assertArrayEquals(expectedMatrix, matrix);
+        assertEquals(expectedMatrix, matrix);
     }
 
     private static Stream<Arguments> provideAdjacentMatrixArgs() {
@@ -55,25 +54,23 @@ class RectAdjacencyMatrixGeneratorTest {
     void generateAdjacencyMatrixForRectangularMaze_notSquare() {
         int w = 10;
         int h = 5;
-        RectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(w, h);
-        int[][] matrix = adjacencyMatrixGenerator.generateAdjMatrix();
+        RectAdjMatrixGenerator adjacencyMatrixGenerator = new RectAdjMatrixGenerator(w, h);
+        AdjMatrix matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
-        assertEquals(w * h, matrix.length);
-        assertEquals(w * h, matrix[0].length);
+        assertEquals(w * h, matrix.size());
 
-        assertArrayEquals(adjacencyMatrix10x5, matrix);
+        assertEquals(adjacencyMatrix10x5, matrix);
     }
 
     @Disabled
     @ParameterizedTest
     @ValueSource(ints = {2, 3, 4, 5})
     void generateAdjacencyMatrixForRectangularMaze(int size) {
-        RectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(size, size);
-        int[][] matrix = adjacencyMatrixGenerator.generateAdjMatrix();
+        RectAdjMatrixGenerator adjacencyMatrixGenerator = new RectAdjMatrixGenerator(size, size);
+        AdjMatrix matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
-        ObjectMapper mapper = new ObjectMapper();
         try {
-            System.out.println(mapper.writeValueAsString(matrix));
+            System.out.println(TestUtils.serializeMatrix(matrix));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

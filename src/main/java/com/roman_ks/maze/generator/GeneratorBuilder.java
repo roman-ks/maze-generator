@@ -1,6 +1,6 @@
 package com.roman_ks.maze.generator;
 
-import com.roman_ks.maze.generator.adjacency.AdjacencyMatrixGenerator;
+import com.roman_ks.maze.generator.adjacency.AdjMatrixGenerator;
 import com.roman_ks.maze.generator.model.Maze;
 import com.roman_ks.maze.generator.selector.EntranceSelector;
 import com.roman_ks.maze.generator.selector.NodeSelector;
@@ -13,7 +13,7 @@ import static java.util.Objects.requireNonNull;
 public class GeneratorBuilder {
 
     private final Supplier<AbstractGenerator> generatorSupplier;
-    private AdjacencyMatrixGenerator matrixGenerator;
+    private AdjMatrixGenerator matrixGenerator;
     private Supplier<Maze> mazeSupplier;
     private NodeSelector nodeSelector;
     private EntranceSelector entranceSelector;
@@ -39,7 +39,7 @@ public class GeneratorBuilder {
     }
 
     public GeneratorBuilder withAdjMatrixGenerator(
-            AdjacencyMatrixGenerator matrixGenerator) {
+            AdjMatrixGenerator matrixGenerator) {
         this.matrixGenerator = matrixGenerator;
         return this;
     }

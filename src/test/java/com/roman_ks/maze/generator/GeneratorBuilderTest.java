@@ -1,6 +1,6 @@
 package com.roman_ks.maze.generator;
 
-import com.roman_ks.maze.generator.adjacency.AdjacencyMatrixGenerator;
+import com.roman_ks.maze.generator.adjacency.AdjMatrixGenerator;
 import com.roman_ks.maze.generator.model.Maze;
 import com.roman_ks.maze.generator.selector.EntranceSelector;
 import com.roman_ks.maze.generator.selector.NodeSelector;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class GeneratorBuilderTest {
 
     @Mock
-    AdjacencyMatrixGenerator matrixGenerator;
+    AdjMatrixGenerator matrixGenerator;
     @Mock
     Supplier<Maze> mazeSupplier;
     @Mock

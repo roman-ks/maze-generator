@@ -1,6 +1,7 @@
 package com.roman_ks.maze.generator.adjacency;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.roman_ks.maze.generator.model.AdjMatrix;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,23 +9,21 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.roman_ks.maze.generator.adjacency.AdjacencyUtil.loadMatrix;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static com.roman_ks.maze.generator.utils.TestUtils.loadMatrix;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class HexRectAdjacencyMatrixGeneratorTest {
+class HexRectAdjMatrixGeneratorTest {
 
     @ParameterizedTest
     @MethodSource("provideAdjacentMatrixArgs")
-    void generateAdjacencyMatrixForRectangularMaze_square(int size, int expSize, int[][] expectedMatrix) {
-        HexRectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new HexRectAdjacencyMatrixGenerator(size, size);
-        int[][] matrix = adjacencyMatrixGenerator.generateAdjMatrix();
+    void generateAdjacencyMatrixForRectangularMaze_square(int size, int expSize, AdjMatrix expectedMatrix) {
+        HexRectAdjMatrixGenerator adjacencyMatrixGenerator = new HexRectAdjMatrixGenerator(size, size);
+        AdjMatrix matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
-        assertEquals(expSize, matrix.length);
-        assertEquals(expSize, matrix[0].length);
+        assertEquals(expSize, matrix.size());
 
-        assertArrayEquals(expectedMatrix, matrix);
+        assertEquals(expectedMatrix, matrix);
     }
 
     private static Stream<Arguments> provideAdjacentMatrixArgs() throws JsonProcessingException {
@@ -39,14 +38,13 @@ class HexRectAdjacencyMatrixGeneratorTest {
         int w = 10;
         int h = 5;
         int expSize = 52;
-        HexRectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new HexRectAdjacencyMatrixGenerator(w, h);
-        int[][] matrix = adjacencyMatrixGenerator.generateAdjMatrix();
+        HexRectAdjMatrixGenerator adjacencyMatrixGenerator = new HexRectAdjMatrixGenerator(w, h);
+        AdjMatrix matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
-        assertEquals(expSize, matrix.length);
-        assertEquals(expSize, matrix[0].length);
+        assertEquals(expSize, matrix.size());
 
-        int[][] expMatrix = loadMatrix("matrices/hex/10x5.json");
-        assertArrayEquals(expMatrix, matrix);
+        AdjMatrix expMatrix = loadMatrix("matrices/hex/10x5.json");
+        assertEquals(expMatrix, matrix);
     }
 
 

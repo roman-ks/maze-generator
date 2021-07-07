@@ -2,6 +2,7 @@ package com.roman_ks.maze.generator.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.roman_ks.maze.generator.model.AdjMatrix;
 import com.roman_ks.maze.generator.model.Node;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -9,26 +10,22 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.roman_ks.maze.generator.utils.TestUtils.loadMatrix;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GraphUtilsTest {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    private static int[][] adjacencyMatrix2x2;
-    private static int[][] adjacencyMatrix3x3;
-    private static int[][] adjacencyMatrix4x4;
+    private static AdjMatrix adjacencyMatrix2x2;
+    private static AdjMatrix adjacencyMatrix3x3;
+    private static AdjMatrix adjacencyMatrix4x4;
 
     @BeforeAll
     public static void loadMatrices() throws JsonProcessingException {
         adjacencyMatrix2x2 = loadMatrix("matrices/rect/2x2.json");
         adjacencyMatrix3x3 = loadMatrix("matrices/rect/3x3.json");
         adjacencyMatrix4x4 = loadMatrix("matrices/rect/4x4.json");
-    }
-
-    private static int[][] loadMatrix(String path) throws JsonProcessingException {
-        String json = TestUtils.readResource(path);
-        return mapper.readValue(json, int[][].class);
     }
 
     @Test
