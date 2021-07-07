@@ -2,12 +2,12 @@ package com.roman_ks.maze.generator.adjacency;
 
 import com.roman_ks.maze.generator.model.AdjMatrix;
 
-public class RectAdjacencyMatrixGenerator implements AdjacencyMatrixGenerator {
+public class RectAdjMatrixGenerator implements AdjMatrixGenerator {
 
     private final int width;
     private final int height;
 
-    public RectAdjacencyMatrixGenerator(int width, int height) {
+    public RectAdjMatrixGenerator(int width, int height) {
         this.width = width;
         this.height = height;
     }

@@ -1,6 +1,6 @@
 package com.roman_ks.maze.generator;
 
-import com.roman_ks.maze.generator.adjacency.RectAdjacencyMatrixGenerator;
+import com.roman_ks.maze.generator.adjacency.RectAdjMatrixGenerator;
 import com.roman_ks.maze.generator.model.Maze;
 import com.roman_ks.maze.generator.model.RectMaze;
 import com.roman_ks.maze.generator.selector.CenterEntranceSelector;
@@ -19,7 +19,7 @@ class NaiveGeneratorTest {
         int height = 20;
 
         Generator generator = GeneratorBuilder.backtracking()
-                .withAdjMatrixGenerator(new RectAdjacencyMatrixGenerator(width, height))
+                .withAdjMatrixGenerator(new RectAdjMatrixGenerator(width, height))
                 .withNodeSelector(new RandomNodeSelector(1L))
                 .withEntranceSelector(new CenterEntranceSelector(width, height, true))
                 .withExitSelector(new CenterEntranceSelector(width, height, false))
@@ -37,7 +37,7 @@ class NaiveGeneratorTest {
         int height = 3;
 
         NaiveGenerator generator = new NaiveGenerator();
-        generator.setMatrixGenerator(new RectAdjacencyMatrixGenerator(width, height));
+        generator.setMatrixGenerator(new RectAdjMatrixGenerator(width, height));
         generator.setMazeSupplier(() -> new RectMaze(width, height));
         generator.setNodeSelector(new RandomNodeSelector(1L));
 

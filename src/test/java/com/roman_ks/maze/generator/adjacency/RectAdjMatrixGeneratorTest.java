@@ -17,7 +17,7 @@ import static com.roman_ks.maze.generator.utils.TestUtils.loadMatrix;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class RectAdjacencyMatrixGeneratorTest {
+class RectAdjMatrixGeneratorTest {
 
     private static AdjMatrix adjacencyMatrix2x2;
     private static AdjMatrix adjacencyMatrix3x3;
@@ -35,7 +35,7 @@ class RectAdjacencyMatrixGeneratorTest {
     @ParameterizedTest
     @MethodSource("provideAdjacentMatrixArgs")
     void generateAdjacencyMatrixForRectangularMaze_square(int size, AdjMatrix expectedMatrix) {
-        RectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(size, size);
+        RectAdjMatrixGenerator adjacencyMatrixGenerator = new RectAdjMatrixGenerator(size, size);
         AdjMatrix matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
         assertEquals(size * size, matrix.size());
@@ -54,7 +54,7 @@ class RectAdjacencyMatrixGeneratorTest {
     void generateAdjacencyMatrixForRectangularMaze_notSquare() {
         int w = 10;
         int h = 5;
-        RectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(w, h);
+        RectAdjMatrixGenerator adjacencyMatrixGenerator = new RectAdjMatrixGenerator(w, h);
         AdjMatrix matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
         assertEquals(w * h, matrix.size());
@@ -66,7 +66,7 @@ class RectAdjacencyMatrixGeneratorTest {
     @ParameterizedTest
     @ValueSource(ints = {2, 3, 4, 5})
     void generateAdjacencyMatrixForRectangularMaze(int size) {
-        RectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new RectAdjacencyMatrixGenerator(size, size);
+        RectAdjMatrixGenerator adjacencyMatrixGenerator = new RectAdjMatrixGenerator(size, size);
         AdjMatrix matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
         try {

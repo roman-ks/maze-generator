@@ -13,12 +13,12 @@ import static com.roman_ks.maze.generator.utils.TestUtils.loadMatrix;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class HexRectAdjacencyMatrixGeneratorTest {
+class HexRectAdjMatrixGeneratorTest {
 
     @ParameterizedTest
     @MethodSource("provideAdjacentMatrixArgs")
     void generateAdjacencyMatrixForRectangularMaze_square(int size, int expSize, AdjMatrix expectedMatrix) {
-        HexRectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new HexRectAdjacencyMatrixGenerator(size, size);
+        HexRectAdjMatrixGenerator adjacencyMatrixGenerator = new HexRectAdjMatrixGenerator(size, size);
         AdjMatrix matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
         assertEquals(expSize, matrix.size());
@@ -38,7 +38,7 @@ class HexRectAdjacencyMatrixGeneratorTest {
         int w = 10;
         int h = 5;
         int expSize = 52;
-        HexRectAdjacencyMatrixGenerator adjacencyMatrixGenerator = new HexRectAdjacencyMatrixGenerator(w, h);
+        HexRectAdjMatrixGenerator adjacencyMatrixGenerator = new HexRectAdjMatrixGenerator(w, h);
         AdjMatrix matrix = adjacencyMatrixGenerator.generateAdjMatrix();
 
         assertEquals(expSize, matrix.size());

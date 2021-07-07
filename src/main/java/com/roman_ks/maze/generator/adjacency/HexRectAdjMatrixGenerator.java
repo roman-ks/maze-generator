@@ -10,12 +10,12 @@ import com.roman_ks.maze.generator.model.AdjMatrix;
  * 10  11  12  13
  * In case above width is 3 and height is 4
  */
-public class HexRectAdjacencyMatrixGenerator implements AdjacencyMatrixGenerator {
+public class HexRectAdjMatrixGenerator implements AdjMatrixGenerator {
 
     private final int width;
     private final int height;
 
-    public HexRectAdjacencyMatrixGenerator(int width, int height) {
+    public HexRectAdjMatrixGenerator(int width, int height) {
         this.width = width;
         this.height = height;
     }
